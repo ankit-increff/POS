@@ -7,14 +7,15 @@ function getSalesReportUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl + "/api/brand?brand="+brand+"&category="+category;
 }
+
+let primaryField = null;
  
- function filterSalesReport() {
+ function filterSalesReport(e) {
+    e.preventDefault();
      var $form = $("#sales-form");
      var json = toJson($form);
      var url = getSalesReportUrl();
 
-     console.log(json);
- 
      $.ajax({
         url: url,
         type: 'POST',
@@ -23,7 +24,6 @@ function getSalesReportUrl(){
          'Content-Type': 'application/json'
         },
         success: function(response) {
-            console.log(response);
              displaySalesReport(response);
         },
         error: handleAjaxError
@@ -31,9 +31,9 @@ function getSalesReportUrl(){
  }
  
  function displaySalesReport(data) {
-     let index = 1;
      var $tbody = $('#sales-table').find('tbody');
      $tbody.empty();
+     let index = 1;
      for(var i in data){
          var b = data[i];
          var row = '<tr>'
@@ -46,17 +46,19 @@ function getSalesReportUrl(){
          $tbody.append(row);
      }
      $('thead').show();
+
+	primaryField = null;
+	fillOptions();
  }
 
 
-const fillOptions = () => {
-	var url = getBrandUrl();
+const fillOptions = (brand="", category="") => {
+	var url = getBrandUrl(brand, category);
 
 	$.ajax({
 	   url: url,
 	   type: 'GET',
 	   success: function(response) {
-		console.log(response);
 			populateBrand(response);
 			populateCategory(response);
 	   },
@@ -66,6 +68,11 @@ const fillOptions = () => {
 
 const populateBrand = data => {
 	let $selectBrand = $("#inputBrand");
+	$selectBrand.empty();
+
+	var initial = '<option value="" selected disabled>Choose a brand...</option>';
+	initial += '<option value="">All</option>';
+    $selectBrand.append(initial);
 
 	let brands = new Set();
 	for(var i in data){
@@ -81,6 +88,11 @@ const populateBrand = data => {
 
 const populateCategory = data => {
 	let $selectCategory = $("#inputCategory");
+	$selectCategory.empty();
+
+	var initial = '<option value="" selected disabled>Choose a category...</option>';
+	initial += '<option value="">All</option>';
+    $selectCategory.append(initial);
 
 	let categories = new Set();
 	for(var i in data){
@@ -93,13 +105,50 @@ const populateCategory = data => {
         $selectCategory.append(ele);
 	}
 }
+
+
+
+const brandChanged = () => {
+	if(primaryField=="category") return;
+	primaryField = "brand";
+
+	let brand = $("#inputBrand")[0].value;
+	var url = getBrandUrl(brand);
+
+	$.ajax({
+	   url: url,
+	   type: 'GET',
+	   success: function(response) {
+			populateCategory(response);
+	   },
+	   error: handleAjaxError
+	});
+}
+
+const categoryChanged = () => {
+	if(primaryField=="brand") return;
+	primaryField = "category";
+
+	let category = $("#inputCategory")[0].value;
+	var url = getBrandUrl("", category);
+
+	$.ajax({
+		url: url,
+		type: 'GET',
+		success: function(response) {
+			 populateBrand(response);
+		},
+		error: handleAjaxError
+	 });
+}
  
  //INITIALIZATION CODE
  function init(){
-    $('#filter-sales-report').click(filterSalesReport);
+    // $('#filter-sales-report').click(filterSalesReport);
     // filterSalesReport();
     $('thead').hide();
     fillOptions();
+    $("#inputEndDate")[0].max = new Date().toISOString().split("T")[0];
  }
  
  $(document).ready(init);

@@ -32,13 +32,12 @@ function addBrand(event){
 	return false;
 }
 
-function createBrand(event){
-	$('#add-brand-modal').modal('toggle');
-}
+// function createBrand(event){
+// 	$('#add-brand-modal').modal('toggle');
+// }
 
 function updateBrand(event){
 
-	$('#edit-brand-modal').modal('toggle');
 	//Get the ID
 	var id = $("#brand-edit-form input[name=id]").val();
 	var url = getBrandUrl() + "/" + id;
@@ -57,6 +56,7 @@ function updateBrand(event){
        },
 	   success: function(response) {
 			console.log("heya responsing");
+			$('#edit-brand-modal').modal('toggle');
 			handleAjaxSuccess("Brand edited successfully!!");
 	   		getBrandList();
 	   },
@@ -216,12 +216,13 @@ function displayBrand(data){
 function init(){
 	$('#add-brand-confirm').click(addBrand);
 	$('#update-brand').click(updateBrand);
-	$('#create-brand').click(createBrand);
+	// $('#create-brand').click(createBrand);
 	$('#refresh-data').click(getBrandList);
 	$('#upload-data').click(displayUploadData);
 	$('#process-data').click(processData);
 	$('#download-errors').click(downloadErrors);
-   $('#brandFile').on('change', updateFileName)
+    $('#brandFile').on('change', updateFileName)
+
 	let element = document.querySelector("#brand-link");
 	element.classList.add("active");
 	

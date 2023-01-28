@@ -14,20 +14,20 @@
 
   <!-- Top row with form-->
   <div class="mt-4">
-    <form id="sales-form">
+    <form id="sales-form" onsubmit="filterSalesReport(event)">
       <div class="row justify-content-between">
         <div class="col-10 col-sm-5 form-group">
           <label for="inputBrand" class="col-form-label">Brand</label>
-          <select class="custom-select form-control" name="brand" id="inputBrand">
-            <option value="" selected>Choose a brand...</option>
+          <select class="custom-select form-control" name="brand" id="inputBrand" onchange="brandChanged()" required>
+            <option value="" selected disabled>Choose a brand...</option>
             <option value="">All</option>
             
           </select>
         </div>
         <div class="col-10 col-sm-5 form-group">
           <label for="inputCategory" class="col-form-label">Category</label>
-          <select class="custom-select form-control" name="category" id="inputCategory">
-            <option value="" selected>Choose a category...</option>
+          <select class="custom-select form-control" name="category" id="inputCategory" onchange="categoryChanged()" required>
+            <option value="" selected disabled>Choose a category...</option>
             <option value="">All</option>
             
           </select>
@@ -46,7 +46,7 @@
         </div>
       </div>
       <div class="row m-auto">
-        <button type="button" class="btn shadow btn-primary px-4 shadow" id="filter-sales-report">Generate Report</button>
+        <button type="submit" class="btn shadow btn-primary px-4 shadow" id="filter-sales-report">Generate Report</button>
       </div>
     </form>
   </div>
