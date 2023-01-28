@@ -1,6 +1,5 @@
 package com.increff.employee.dto;
 
-import com.increff.employee.dao.BrandDao;
 import com.increff.employee.pojo.BrandPojo;
 import com.increff.employee.service.ApiException;
 import com.increff.employee.service.BrandService;

@@ -20,7 +20,7 @@ function addOrder(event){
 	   data: json,
 	   headers: {
        	'Content-Type': 'application/json'
-       },	   
+       },	 
 	   success: function(response) {
 			$('#add-order-modal').modal('toggle');
 			$rawForm[0].reset();
@@ -210,6 +210,7 @@ function removeFromModal(e) {
 }
 
 function checkValue(quantity, price) {
+	
 	//check
 	if(quantity<1) {
 		throwError("Quantity should be greater than 0");
@@ -447,14 +448,6 @@ function generateInvoice(id){
 }
 
 
-
-
-
-
-
-
-
-
 //INITIALIZATION CODE
 function init(){
 	$('#add-order-confirm').click(CreateNewOrder);
@@ -469,16 +462,3 @@ function init(){
 
 $(document).ready(init);
 $(document).ready(getOrderList);
-
-
-
-
-
-
-
-
-
-
-
-
-

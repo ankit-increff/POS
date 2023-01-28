@@ -34,7 +34,6 @@ public class OrderDto {
             checkValidity(f);
         }
 
-
         OrderPojo p = new OrderPojo();
         Date date = new Date();
         p.setDate(date);
@@ -128,12 +127,10 @@ public class OrderDto {
             int oldQuantity = inventoryService.get(productId).getQuantity();
             inventoryService.get(productId).setQuantity(oldQuantity + item.getQuantity());
         }
-        System.out.println("running2");
         //TIME UPDATE IN ORDER TABLE
         OrderPojo p = service.get(orderId);
         Date date = new Date();
         p.setDate(date);
-        System.out.println("running3");
 
         //INVENTORY UPDATE A/C TO NEW REQUIREMENTS
         Map<Integer, OrderForm> orderFormMap = new HashMap<>(); //map<productid, form>
@@ -142,7 +139,6 @@ public class OrderDto {
             orderFormMap.put(productId, f);
             updateInventory(f,productId);
         }
-        System.out.println("running4");
 
         //ORDER ITEM MANAGEMENT
         for(OrderItemPojo itemPojo : oldItems) {
@@ -156,7 +152,6 @@ public class OrderDto {
                 itemService.delete(itemPojo.getId());
             }
         }
-        System.out.println("running5");
 
         for(OrderForm f : orderFormMap.values())
         {
@@ -165,7 +160,6 @@ public class OrderDto {
             itemPojo.setOrderId(orderId);
             itemService.add(itemPojo);
         }
-        System.out.println("running6");
 
     }
     //----------------------------------------------------------------------------------------------------

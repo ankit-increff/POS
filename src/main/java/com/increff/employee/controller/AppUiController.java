@@ -69,6 +69,11 @@ public class AppUiController extends AbstractUiController {
 		return mav("dailyReport.html");
 	}
 
+	@RequestMapping(value = "/ui")
+	public ModelAndView ui() {
+		return new ModelAndView("redirect:/ui/home");
+	}
+
 
 
 }

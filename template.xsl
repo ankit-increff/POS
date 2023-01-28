@@ -45,6 +45,26 @@
     </xsl:attribute-set>
     <xsl:template match="bill">
         <fo:block text-align="center">
+
+            <fo:table table-layout="fixed" width="100%">
+                <fo:table-column column-width="50%" />
+                <fo:table-column column-width="50%" />
+                <fo:table-body>
+                    <fo:table-row>
+                        <fo:table-cell padding-top="50pt">
+                            <fo:block font-size="12pt" font-family="sans-serif" color="black" text-align="left">
+                                Order Id :  <xsl:value-of select="order_id" />
+                            </fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell padding-top="50pt">
+                            <fo:block font-size="20pt" font-family="sans-serif" color="red" text-align="center">
+
+                            </fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                </fo:table-body>
+            </fo:table>
+
             <fo:table table-layout="fixed" width="100%">
                 <fo:table-column column-width="50%" />
                 <fo:table-column column-width="50%" />
@@ -79,7 +99,7 @@
                             <fo:block font-size="15pt" font-family="sans-serif"
                                       background-color="black" color="white" text-align="center"
                                       padding-top="3pt">
-                                Item-No.
+                                Barcode
                             </fo:block>
                         </fo:table-cell>
                         <fo:table-cell padding-top="30pt">
@@ -156,16 +176,11 @@
                     <fo:table-row>
                         <fo:table-cell padding-top="50pt">
                             <fo:block font-size="20pt" font-family="sans-serif"
-                                      color="black" text-align="center" >
-                                Total
+                                      color="black" text-align="left" >
+                                Total: <xsl:value-of select="total" />
                             </fo:block>
                         </fo:table-cell>
-                        <fo:table-cell padding-top="50pt">
-                            <fo:block font-size="20pt" font-family="sans-serif"
-                                      color="blue" text-align="center">
-                                <xsl:value-of select="total" />
-                            </fo:block>
-                        </fo:table-cell>
+
                     </fo:table-row>
                 </fo:table-body>
             </fo:table>

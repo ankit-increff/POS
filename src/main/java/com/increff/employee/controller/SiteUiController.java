@@ -52,4 +52,12 @@ public class SiteUiController extends AbstractUiController {
 		return mav("features.html");
 	}
 
+	@RequestMapping(value = "/site")
+	public ModelAndView site() {
+		if(!Objects.equals(info.getEmail(), "")){
+			return new ModelAndView("redirect:/ui/home");
+		}
+		return new ModelAndView("redirect:/site/login");
+	}
+
 }

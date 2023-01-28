@@ -39,6 +39,10 @@ public class GenerateXML {
         document.appendChild(root);
         double finalBill = 0;
 
+        Element orderId = document.createElement("order_id");
+        orderId.appendChild(document.createTextNode(String.valueOf(billDataItems.get(0).getId())));
+        root.appendChild(orderId);
+
         Element date = document.createElement("date");
         date.appendChild(document.createTextNode(getDate()));
         root.appendChild(date);
