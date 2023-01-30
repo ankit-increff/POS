@@ -191,13 +191,32 @@ function displayInEditTable(e) {
 	let price = document.querySelector(".edit-price");
 	let barcode = document.querySelector(".edit-barcode");
 	
+	if(parseFloat(price.value)>parseFloat(e.mrp)) {
+		throwError("Selling price should not be greater than MRP (i.e. "+parseFloat(e.mrp).toFixed(2)+")");
+		return;
+	}
+	
 	var $tbody = $('#order-edit-table').find('tbody');
-		var buttonHtml = '<button title="Delete" class="btn" onclick=removeFromModal(event)><img src="'+getBaseUrl()+'/static/images/delete.png" alt="Delete" /></button>'
-		var row = '<tr class="update-row">'
+	let barcodes = $tbody[0].querySelectorAll(".update-barcode");
+
+	for(ele of barcodes) {
+		if(ele.innerText == barcode.value){
+			let qty = ele.parentElement.querySelector('.update-quantity');
+			qty.value = parseInt(quantity.value) + parseInt(qty.value);
+			quantity.value = null;
+			price.value = null;
+			barcode.value = null;
+
+			return;
+		}
+	}
+
+	var buttonHtml = '<button title="Delete" class="btn" onclick=removeFromModal(event)><img src="'+getBaseUrl()+'/static/images/delete.png" alt="Delete" /></button>'
+	var row = '<tr class="update-row">'
 		+ '<td class="update-barcode">' + e.barcode + '</td>'
 		+ '<td>' + e.name + '</td>'
 		+ '<td><input type="number" min="1" class="form-control update-quantity" value="'  + quantity.value + '" required></td>'
-		+ '<td><input type="number" step="0.01" min="0.01" class="form-control text-right update-price" value="'  + parseFloat(price.value).toFixed(2) + '" required></td>'
+		+ '<td><input type="number" step="0.01" min="0.01" max="'+ parseFloat(e.mrp).toFixed(2) +'" class="form-control text-right update-price" value="'  + parseFloat(price.value).toFixed(2) + '" required></td>'
 		+ '<td class="text-center">' + buttonHtml + '</td>'
 		+ '</tr>';
      $tbody.append(row);
@@ -229,6 +248,7 @@ function checkValue(quantity, price) {
 
 
 //_______________________________CREATE NEW ORDER____________________________
+let createOrderBarcode = [];
 function addInCreateTable(event) {
 	event.preventDefault();
 
@@ -246,7 +266,6 @@ function addInCreateTable(event) {
 	   url: url,
 	   type: 'GET',
 	   success: function(data) {
-			console.log(data);
 	   		displayInCreateTable(data);
 	   },
 	   error: handleAjaxError
@@ -257,14 +276,33 @@ function displayInCreateTable(e) {
 	let quantity = document.querySelector(".add-quantity");
 	let price = document.querySelector(".add-price");
 	let barcode = document.querySelector(".add-barcode");
+
+	if(parseFloat(price.value)>parseFloat(e.mrp)) {
+		throwError("Selling price should not be greater than MRP (i.e. "+parseFloat(e.mrp).toFixed(2)+")");
+		return;
+	}
 	
 	var $tbody = $('#order-add-table').find('tbody');
-		var buttonHtml = '<button title="Delete" class="btn" onclick=removeFromModal(event)><img src="'+getBaseUrl()+'/static/images/delete.png" alt="Delete" /></button>'
-		var row = '<tr class="new-row">'
+	let barcodes = $tbody[0].querySelectorAll(".new-barcode");
+	console.log(barcodes);
+	for(ele of barcodes) {
+		if(ele.innerText == barcode.value){
+			let qty = ele.parentElement.querySelector('.new-quantity');
+			qty.value = parseInt(quantity.value) + parseInt(qty.value);
+			quantity.value = null;
+			price.value = null;
+			barcode.value = null;
+
+			return;
+		}
+	}
+
+	var buttonHtml = '<button title="Delete" class="btn" onclick=removeFromModal(event)><img src="'+getBaseUrl()+'/static/images/delete.png" alt="Delete" /></button>'
+	var row = '<tr class="new-row">'
 		+ '<td class="new-barcode">' + e.barcode + '</td>'
 		+ '<td>' + e.name + '</td>'
 		+ '<td><input type="number" class="form-control new-quantity" value="'  + quantity.value + '" min="1" required></td>'
-		+ '<td class="text-right"><input type="number" step="0.01" class="form-control text-right new-price" min="0.01" value="'  + parseFloat(price.value).toFixed(2) + '" required></td>'
+		+ '<td class="text-right"><input type="number" step="0.01" class="form-control text-right new-price" min="0.01" max="'+ parseFloat(e.mrp).toFixed(2) +'" value="'  + parseFloat(price.value).toFixed(2) + '" required></td>'
 		+ '<td class="text-center">' + buttonHtml + '</td>'
 		+ '</tr>';
      $tbody.append(row);

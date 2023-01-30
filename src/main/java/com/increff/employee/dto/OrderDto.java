@@ -32,6 +32,7 @@ public class OrderDto {
         {
             checkInventory(f);
             checkValidity(f);
+            checkPrice(f);
         }
 
         OrderPojo p = new OrderPojo();
@@ -116,9 +117,9 @@ public class OrderDto {
         for(OrderForm f:newForms)
         {
             checkQuantity(oldItems, f);
+            checkPrice(f);
             checkValidity(f);
         }
-        System.out.println("running");
 
         //REVERTING OLD CHANGES IN INVENTORY
         for(OrderItemPojo item:oldItems)
@@ -223,6 +224,13 @@ public class OrderDto {
         }
         if(Double.parseDouble(f.getSellingPrice())<0) {
             throw new ApiException("Invalid selling price!!");
+        }
+    }
+
+    private void checkPrice(OrderForm f) throws ApiException {
+        double mrp = productService.get(f.getBarcode()).getMrp();
+        if(Double.parseDouble(f.getSellingPrice())>mrp) {
+            throw new ApiException("Selling price should not be greater than Mrp. (Barcode:"+f.getBarcode()+", MRP: "+mrp+")");
         }
     }
 

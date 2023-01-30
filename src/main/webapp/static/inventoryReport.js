@@ -80,8 +80,9 @@ const populateBrand = data => {
 		var e = data[i];
 		brands.add(e.name);
 	}
+	const sortedBrands = new Set(Array.from(brands).sort());
 
-	for(brand of brands.values()) {
+	for(brand of sortedBrands.values()) {
 		var ele = '<option value="'+brand+'">' + brand + '</option>';
         $selectBrand.append(ele);
 	}
@@ -95,13 +96,16 @@ const populateCategory = data => {
 	initial += '<option value="">All</option>';
     $selectCategory.append(initial);
 
+	
+
 	let categories = new Set();
 	for(var i in data){
 		var e = data[i];
 		categories.add(e.category);
 	}
+	const sortedCategories = new Set(Array.from(categories).sort());
 
-	for(category of categories.values()) {
+	for(category of sortedCategories.values()) {
 		var ele = '<option value="'+category+'">' + category + '</option>';
         $selectCategory.append(ele);
 	}
