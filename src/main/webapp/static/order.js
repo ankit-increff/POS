@@ -150,17 +150,20 @@ function editOrderForm(data) {
 		var row = '<tr class="update-row">'
 		+ '<td class="update-barcode">' + e.barcode + '</td>'
 		+ '<td>' + e.name + '</td>'
-		+ '<td><input type="number" class="form-control update-quantity" value="'  + e.quantity + '"></td>'
-		+ '<td class="text-right"><input type="number" class="form-control text-right update-price" value="'  + parseFloat(e.sellingPrice).toFixed(2) + '"></td>'
+		+ '<td><input type="number" step="1" min="1" class="form-control update-quantity" value="'  + e.quantity + '" required></td>'
+		+ '<td class="text-right"><input step="0.01" min="0.01" type="number" class="form-control text-right update-price" value="'  + parseFloat(e.sellingPrice).toFixed(2) + '" required></td>'
 		+ '<td class="text-center">' + buttonHtml + '</td>'
 		+ '</tr>';
         $tbody.append(row);
-	}	
+	}
+	verifyNumberInput();	
 	$('#order-edit-modal').modal('toggle');
 }
 
 //_____________________________________________MODIFY EDIT TABLE____________________________________
-function addInEditTable() {
+function addInEditTable(e) {
+	e.preventDefault();
+
 	let barcode = document.querySelector(".edit-barcode");
 	let quantity = document.querySelector(".edit-quantity");
 	let price = document.querySelector(".edit-price");
@@ -193,11 +196,12 @@ function displayInEditTable(e) {
 		var row = '<tr class="update-row">'
 		+ '<td class="update-barcode">' + e.barcode + '</td>'
 		+ '<td>' + e.name + '</td>'
-		+ '<td><input type="number" class="form-control update-quantity" value="'  + quantity.value + '"></td>'
-		+ '<td><input type="number" class="form-control text-right update-price" value="'  + parseFloat(price.value).toFixed(2) + '"></td>'
+		+ '<td><input type="number" min="1" class="form-control update-quantity" value="'  + quantity.value + '" required></td>'
+		+ '<td><input type="number" step="0.01" min="0.01" class="form-control text-right update-price" value="'  + parseFloat(price.value).toFixed(2) + '" required></td>'
 		+ '<td class="text-center">' + buttonHtml + '</td>'
 		+ '</tr>';
      $tbody.append(row);
+	 verifyNumberInput();
 
 	 quantity.value = null;
 	 price.value = null;
@@ -225,7 +229,9 @@ function checkValue(quantity, price) {
 
 
 //_______________________________CREATE NEW ORDER____________________________
-function addInCreateTable() {
+function addInCreateTable(event) {
+	event.preventDefault();
+
 	let barcode = document.querySelector(".add-barcode");
 	let quantity = document.querySelector(".add-quantity");
 	let price = document.querySelector(".add-price");
@@ -257,11 +263,12 @@ function displayInCreateTable(e) {
 		var row = '<tr class="new-row">'
 		+ '<td class="new-barcode">' + e.barcode + '</td>'
 		+ '<td>' + e.name + '</td>'
-		+ '<td><input type="number" class="form-control new-quantity" value="'  + quantity.value + '"></td>'
-		+ '<td class="text-right"><input type="number" class="form-control text-right new-price" value="'  + parseFloat(price.value).toFixed(2) + '"></td>'
+		+ '<td><input type="number" class="form-control new-quantity" value="'  + quantity.value + '" min="1" required></td>'
+		+ '<td class="text-right"><input type="number" step="0.01" class="form-control text-right new-price" min="0.01" value="'  + parseFloat(price.value).toFixed(2) + '" required></td>'
 		+ '<td class="text-center">' + buttonHtml + '</td>'
 		+ '</tr>';
      $tbody.append(row);
+	 verifyNumberInput();
 
 	 quantity.value = null;
 	 price.value = null;
@@ -269,7 +276,8 @@ function displayInCreateTable(e) {
 }
 
 //____________________________________PLACE NEW ORDER________________________________________
-function CreateNewOrder(e) {
+function createNewOrder(e) {
+	e.preventDefault();
 	console.log("update click registered!");
 	let rows = document.getElementsByClassName("new-row");
 	let req = [];
@@ -313,6 +321,7 @@ function CreateNewOrder(e) {
 
 //____________________________________SUBMIT UPDATE ORDER________________________________________
 function updateOrder(e) {
+	e.preventDefault();
 	console.log("update click registered!");
 	let rows = document.getElementsByClassName("update-row");
 	let req = [];
@@ -450,12 +459,13 @@ function generateInvoice(id){
 
 //INITIALIZATION CODE
 function init(){
-	$('#add-order-confirm').click(CreateNewOrder);
+	// $('#add-order-confirm').click(CreateNewOrder);
 	$('#refresh-data').click(getOrderList);
 	$('#upload-data').click(displayUploadData);
 	// $('#process-data').click(processData);
 	// $('#download-errors').click(downloadErrors);
     // $('#orderFile').on('change', updateFileName)
+
 	let element = document.querySelector("#order-link");
 	element.classList.add("active");
 }

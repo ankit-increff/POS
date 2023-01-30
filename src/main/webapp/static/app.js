@@ -19,19 +19,35 @@ const getRole = () => $("meta[name=role]").attr("content");
 function handleAjaxError(response){
 	var response = JSON.parse(response.responseText);
 	// alert(response.message);
+    $('.notifyjs-wrapper').trigger('notify-hide');
     $.notify.defaults( {clickToHide:true,autoHide:false} );
     $.notify(response.message + " ❌", 'error');
 }
 
 function throwError(message){
+    $('.notifyjs-wrapper').trigger('notify-hide');
     $.notify.defaults( {clickToHide:true,autoHide:false} );
     $.notify(message + " ❌", 'error');
 }
 
 function handleAjaxSuccess(response){
+    $('.notifyjs-wrapper').trigger('notify-hide');
     $.notify.defaults( {clickToHide:true,autoHide:true} );
     $.notify(response, 'success');
 }
+
+//prevent 'e' press in number field
+var invalidChars = [
+    "-",
+    "+",
+    "e",
+];
+
+const verifyNumberInput = () =>  document.querySelectorAll('input[type="number"]').forEach( input => input.addEventListener("keydown", function(e) {
+    if (invalidChars.includes(e.key)) {
+      e.preventDefault();
+    }
+  }));
 
 function readFileData(file, callback){
 	var config = {
@@ -79,6 +95,9 @@ const verifyRole = () => {
     }
 }
 verifyRole();
+verifyNumberInput();
+
+
 
 // document.querySelector("form").addEventListener("submit", (e) => {
 //     e.preventDefault();

@@ -8,6 +8,7 @@ function getInventoryUrl(){
 
 //BUTTON ACTIONS
 function addInventory(event){
+	event.preventDefault();
 	//Set the values to update
 	var $form = $("#inventory-form");
 	var json = toJson($form);
@@ -34,6 +35,7 @@ function addInventory(event){
 }
 
 function updateInventory(event){
+	event.preventDefault();
 	var barcode = $("#inventory-edit-form input[name=barcode]").val();
 	var url = getInventoryUrl() + "/" + barcode;
 
@@ -221,8 +223,8 @@ function displayInventory(data){
 
 //INITIALIZATION CODE
 function init(){
-	$('#add-inventory-confirm').click(addInventory);
-	$('#update-inventory').click(updateInventory);
+	// $('#add-inventory-confirm').click(addInventory);
+	// $('#update-inventory').click(updateInventory);
 	$('#refresh-data').click(getInventoryList);
 	$('#upload-data').click(displayUploadData);
 	$('#process-data').click(processData);

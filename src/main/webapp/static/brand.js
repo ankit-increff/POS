@@ -8,6 +8,7 @@ function getBrandUrl(){
 
 //BUTTON ACTIONS
 function addBrand(event){
+	event.preventDefault();
 	//Set the values to update
 	var $form = $("#brand-add-form");
 	var json = toJson($form);
@@ -37,6 +38,7 @@ function addBrand(event){
 // }
 
 function updateBrand(event){
+	event.preventDefault();
 
 	//Get the ID
 	var id = $("#brand-edit-form input[name=id]").val();
@@ -214,8 +216,8 @@ function displayBrand(data){
 
 //INITIALIZATION CODE
 function init(){
-	$('#add-brand-confirm').click(addBrand);
-	$('#update-brand').click(updateBrand);
+	// $('#add-brand-confirm').click(addBrand);
+	// $('#update-brand').click(updateBrand);
 	// $('#create-brand').click(createBrand);
 	$('#refresh-data').click(getBrandList);
 	$('#upload-data').click(displayUploadData);

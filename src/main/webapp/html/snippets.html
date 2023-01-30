@@ -85,7 +85,9 @@
     
     <ul class="navbar-nav ml-auto">
       <li class="nav-item dropdown">
-        <div class="nav-link dropdown-toggle" id="reports-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><b>[[${info.getEmail()}]]</b>&nbsp;([[${info.getRole()}]])</div>
+        <div class="mb-3 nav-link position-relative dropdown-toggle" id="reports-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          [[${info.getEmail()}]]
+          <p class=" position-absolute bg-info text-white px-2 mt-1 rounded-pill medium">([[${info.getRole()}]])</p></div>
         <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="reports-link" style="padding: 0;">
           <a id="logout-link" class="dropdown-item nav-link" th:href="@{/session/logout}">Logout &#9;<img th:src=@{/static/images/check-out.png}/></a>
         </div>
