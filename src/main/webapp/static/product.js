@@ -39,7 +39,7 @@ function addProduct(event){
 }
 
 function updateProduct(e){
-	e.preventDefaut();
+	e.preventDefault();
 	
 	//Get the ID
 	var id = $("#product-edit-form input[name=id]").val();

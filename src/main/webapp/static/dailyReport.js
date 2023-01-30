@@ -1,4 +1,6 @@
 console.log("Report running");
+let element = document.querySelector("#dailyReportLink");
+element.classList.add("active");
 
 
 function getReportUrl(){
@@ -24,6 +26,7 @@ function getReportList(){
 function displayReportList(data){
 	var $tbody = $('#daily-table').find('tbody');
 	$tbody.empty();
+	data.reverse();
 	let index = 1;
 	for(var i in data){
 		var e = data[i];

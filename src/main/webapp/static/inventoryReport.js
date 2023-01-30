@@ -151,6 +151,9 @@ const categoryChanged = () => {
 	$('thead').hide();
 	// filterReport();
 	fillOptions();
+
+	let element = document.querySelector("#inventoryReportLink");
+	element.classList.add("active");
  }
  
  $(document).ready(init);

@@ -51,13 +51,21 @@ a:hover, .dropdown-item:hover {
 .img-link:hover {
 	/* transform: scale(1.05); */
 	background-color: transparent;
+	/* border: none;
+	box-shadow: none !important; */
+    
 }
 
 .active {
 	/* font-weight:400; */
 	/* color: aqua !important; */
-	text-shadow: 1px 1px 10px #56a597;
+	/* text-shadow: 1px 1px 10px #56a597; */
+	background-color: #0085f230 !important;
 	color: #0069c2 !important;
+	text-decoration: none;
+	border-bottom: solid;
+	border-radius: 0.7rem;
+	box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 
 }
 

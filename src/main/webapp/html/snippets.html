@@ -60,22 +60,22 @@
         <li class="nav-item">
             <a class="nav-link" id="brand-link" th:href="@{/ui/brand}">Brand</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ml-2">
             <a class="nav-link" id="product-link" th:href="@{/ui/product}">Product</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ml-2">
             <a class="nav-link" id="inventory-link" th:href="@{/ui/inventory}">Inventory</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ml-2">
             <a class="nav-link" id="order-link" th:href="@{/ui/order}">Order</a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown ml-2">
           <a class="nav-link dropdown-toggle" id="reports-link" th:href="@{/ui/reports}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reports</a>
           <div class="dropdown-menu shadow" aria-labelledby="reports-link">
-            <a class="dropdown-item" th:href="@{/ui/reports/inventory}">Inventory Report</a>
-            <a class="dropdown-item" th:href="@{/ui/reports/brand-category}">Brand Category Report</a>
-            <a class="dropdown-item" th:href="@{/ui/reports/sales}">Sales Report</a>
-            <a class="dropdown-item" th:href="@{/ui/reports/daily-report}">Daily Sales Report</a>
+            <a id="inventoryReportLink" class="dropdown-item" th:href="@{/ui/reports/inventory}">Inventory Report</a>
+            <a id="brandCategoryReportLink" class="dropdown-item mt-1" th:href="@{/ui/reports/brand-category}">Brand Category Report</a>
+            <a id="salesReportLink" class="dropdown-item mt-1" th:href="@{/ui/reports/sales}">Sales Report</a>
+            <a id="dailyReportLink" class="dropdown-item mt-1" th:href="@{/ui/reports/daily-report}">Daily Sales Report</a>
           </div>
       </li>
       <li class="nav-item supervisor-only">

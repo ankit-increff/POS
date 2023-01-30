@@ -1,5 +1,7 @@
 package com.increff.employee.dto;
 
+import com.increff.employee.model.BrandData;
+import com.increff.employee.model.BrandForm;
 import com.increff.employee.pojo.BrandPojo;
 import com.increff.employee.service.ApiException;
 import com.increff.employee.service.BrandService;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -18,7 +21,8 @@ public class BrandDto {
 
     //ADDING A BRAND
     @Transactional(rollbackOn = ApiException.class)
-    public void add(BrandPojo p) throws ApiException {
+    public void add(BrandForm f) throws ApiException {
+        BrandPojo p = convert(f);
         normalize(p);
         alreadyExistingCheck(p);
         if(StringUtil.isEmpty(p.getName()) || StringUtil.isEmpty(p.getCategory())) {
@@ -35,8 +39,8 @@ public class BrandDto {
 
     //GETTING A BRAND
     @Transactional(rollbackOn = ApiException.class)
-    public BrandPojo get(int id) throws ApiException {
-        return getCheck(id);
+    public BrandData get(int id) throws ApiException {
+        return convert(getCheck(id));
     }
 
     //GETTING A BRAND BY NAME AND CATEGORY
@@ -54,16 +58,22 @@ public class BrandDto {
 
     //GET ALL BRANDS
     @Transactional
-    public List<BrandPojo> getAll() {
-        return service.getAll();
+    public List<BrandData> getAll() {
+        List<BrandPojo> list = service.getAll();
+        List<BrandData> list2 = new ArrayList<BrandData>();
+        for (BrandPojo p : list) {
+            list2.add(convert(p));
+        }
+        return list2;
     }
 
     //UPDATE A BRAND
     @Transactional(rollbackOn  = ApiException.class)
-    public void update(int id, BrandPojo p) throws ApiException {
+    public void update(int id, BrandForm f) throws ApiException {
+        BrandPojo p = convert(f);
         normalize(p);
         if(StringUtil.isEmpty(p.getName()) || StringUtil.isEmpty(p.getCategory())) {
-            throw new ApiException("name or category cannot be empty");
+            throw new ApiException("Name or category cannot be empty");
         }
         BrandPojo ex = getCheck(id);
         alreadyExistingCheck(p);
@@ -105,5 +115,20 @@ public class BrandDto {
     protected static void normalize(BrandPojo p) {
         p.setName(StringUtil.toLowerCase(p.getName()));
         p.setCategory(StringUtil.toLowerCase(p.getCategory()));
+    }
+
+    private static BrandData convert(BrandPojo p) {
+        BrandData d = new BrandData();
+        d.setCategory(p.getCategory());
+        d.setName(p.getName());
+        d.setId(p.getId());
+        return d;
+    }
+
+    private static BrandPojo convert(BrandForm f) {
+        BrandPojo p = new BrandPojo();
+        p.setCategory(f.getCategory());
+        p.setName(f.getName());
+        return p;
     }
 }

@@ -170,7 +170,7 @@ public class ReportDto {
         return dailySalesService.getAll();
     }
 
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 0 18 * * ?")
     @Transactional(rollbackOn = ApiException.class)
     public void saveDailySales() throws ApiException {
         DailySalesPojo p = new DailySalesPojo();

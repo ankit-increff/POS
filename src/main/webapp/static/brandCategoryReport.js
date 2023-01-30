@@ -148,6 +148,9 @@ function init(){
 	$('thead').hide();
 	// filterReport();
 	fillOptions();
+
+	let element = document.querySelector("#brandCategoryReportLink");
+	element.classList.add("active");
 }
  
  $(document).ready(init);
