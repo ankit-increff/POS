@@ -155,6 +155,7 @@ function downloadErrors(){
 function displayProductList(data){
 	var $tbody = $('#product-table').find('tbody');
 	$tbody.empty();
+	data.reverse();
 	let index = 1;
 
 	for(var i in data){

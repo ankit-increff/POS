@@ -146,6 +146,7 @@ console.log("displaying brand")
 	let index=1;
 	var $tbody = $('#brand-table').find('tbody');
 	$tbody.empty();
+	data.reverse();
 	for(var i in data){
 		var e = data[i];
 		// var buttonHtml = '<button onclick="deleteBrand(' + e.id + ')">delete</button>'
@@ -194,7 +195,8 @@ function updateUploadDialog(){
 
 function updateFileName(){
 	var $file = $('#brandFile');
-	var fileName = $file.val();
+	var fileName = $file.val().split('\\').pop();
+	console.log(fileName);
 	$('#brandFileName').html(fileName);
 }
 

@@ -54,9 +54,9 @@
   </button>
   <div class="collapse navbar-collapse ml-4" id="navbarNav">
     <ul class="navbar-nav nav-left">
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" id="home-link" th:href="@{/ui/home}">Home</a>
-      </li>
+      </li> -->
         <li class="nav-item">
             <a class="nav-link" id="brand-link" th:href="@{/ui/brand}">Brand</a>
         </li>
@@ -79,7 +79,6 @@
           </div>
       </li>
       <li class="nav-item supervisor-only">
-        <a class="nav-link" id="admin-link" th:href="@{/ui/admin}">Admin</a>
       </li>
     </ul>
     
@@ -89,7 +88,8 @@
           [[${info.getEmail()}]]
           <p class=" position-absolute bg-info text-white px-2 mt-1 rounded-pill medium">([[${info.getRole()}]])</p></div>
         <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="reports-link" style="padding: 0;">
-          <a id="logout-link" class="dropdown-item nav-link" th:href="@{/session/logout}">Logout &#9;<img th:src=@{/static/images/check-out.png}/></a>
+          <a id="admin-link" class="dropdown-item nav-link extra-link" th:href="@{/ui/admin}">Admin &#9;<img th:src=@{/static/images/admin-small.png}/></a>
+          <a id="logout-link" class="dropdown-item nav-link extra-link" th:href="@{/session/logout}">Logout &#9;<img th:src=@{/static/images/check-out.png}/></a>
         </div>
     </li>
     </ul>

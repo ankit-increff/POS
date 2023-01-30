@@ -70,7 +70,7 @@ thead{
 	z-index: auto !important;
 }
 
-#logout-link:hover {
+.extra-link:hover {
 	background-color: #d5d5d5;
     color: #0069c2 !important;
 	border-radius: 0;

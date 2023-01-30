@@ -62,7 +62,7 @@ function displayUserList(data){
 	for(var i in data){
 		var e = data[i];
 		var buttonHtml = ' <button class="btn" title="Edit" onclick="displayEditUser(' + e.id + ')"><img src="'+getBaseUrl()+'/static/images/edit1.png" alt="Edit" /></button>'
-		buttonHtml += '<button class="btn" title="Delete" onclick="deleteUser(' + e.id + ')"><img src="'+getBaseUrl()+'/static/images/delete.png" alt="Delete" /></button>'
+		// buttonHtml += '<button class="btn" title="Delete" onclick="deleteUser(' + e.id + ')"><img src="'+getBaseUrl()+'/static/images/delete.png" alt="Delete" /></button>'
 		var row = '<tr>'
 		+ '<td>' + e.id + '</td>'
 		+ '<td>' + e.email + '</td>'
@@ -122,8 +122,6 @@ function init(){
 	$('#refresh-data').click(getUserList);
 	$('#update-user').click(updateUser);
 
-	let element = document.querySelector("#admin-link");
-	element.classList.add("active");
 }
 
 $(document).ready(init);

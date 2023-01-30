@@ -152,6 +152,7 @@ function downloadErrors(){
 function displayInventoryList(data){
 	var $tbody = $('#inventory-table').find('tbody');
 	$tbody.empty();
+	data.reverse();
 	let index = 1;
 	for(var i in data){
 		var e = data[i];
