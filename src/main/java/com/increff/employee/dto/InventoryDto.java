@@ -23,11 +23,12 @@ public class InventoryDto {
     @Autowired
     private ProductService productService;
 
-    @Transactional(rollbackOn = ApiException.class)
-    public void add(InventoryForm form) throws ApiException {
-        InventoryPojo p = convert(form);
-        service.add(p);
-    }
+//    @Transactional(rollbackOn = ApiException.class)
+//    public InventoryData add(InventoryForm form) throws ApiException {
+//        InventoryPojo p = convert(form);
+//        InventoryPojo inventoryPojo = service.add(p);
+//        return convert(inventoryPojo);
+//    }
 
     @Transactional(rollbackOn = ApiException.class)
     public void increase(InventoryForm form) throws ApiException {

@@ -24,9 +24,9 @@ public class ProductDto {
 
 
     @Transactional(rollbackOn = ApiException.class)
-    public void add(ProductForm form) throws ApiException {
+    public ProductPojo add(ProductForm form) throws ApiException {
         ProductPojo p = convert(form);
-        service.add(p);
+        return service.add(p);
     }
 
     @Transactional(rollbackOn = ApiException.class)
@@ -52,9 +52,9 @@ public class ProductDto {
 	}
 
     @Transactional(rollbackOn = ApiException.class)
-    public void update(int id, ProductForm f) throws ApiException {
+    public ProductPojo update(int id, ProductForm f) throws ApiException {
         ProductPojo p = convert(f);
-        service.update(id, p);
+        return service.update(id, p);
     }
 
 

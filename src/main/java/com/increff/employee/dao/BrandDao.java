@@ -24,9 +24,10 @@ public class BrandDao extends AbstractDao {
 	private EntityManager em;
 
 	@Transactional
-	public void insert(BrandPojo p) {
+	public BrandPojo insert(BrandPojo p) {
 //		System.out.println(p.getName()+p.getId());
 		em.persist(p);
+		return p;
 	}
 
 	public int delete(int id) {

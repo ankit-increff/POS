@@ -21,14 +21,14 @@ public class BrandDto {
 
     //ADDING A BRAND
     @Transactional(rollbackOn = ApiException.class)
-    public void add(BrandForm f) throws ApiException {
+    public BrandPojo add(BrandForm f) throws ApiException {
         BrandPojo p = convert(f);
         normalize(p);
         alreadyExistingCheck(p);
         if(StringUtil.isEmpty(p.getName()) || StringUtil.isEmpty(p.getCategory())) {
             throw new ApiException("name or category cannot be empty");
         }
-        service.add(p);
+        return service.add(p);
     }
 
     //DELETING A BRAND
@@ -69,7 +69,7 @@ public class BrandDto {
 
     //UPDATE A BRAND
     @Transactional(rollbackOn  = ApiException.class)
-    public void update(int id, BrandForm f) throws ApiException {
+    public BrandPojo update(int id, BrandForm f) throws ApiException {
         BrandPojo p = convert(f);
         normalize(p);
         if(StringUtil.isEmpty(p.getName()) || StringUtil.isEmpty(p.getCategory())) {
@@ -79,6 +79,7 @@ public class BrandDto {
         alreadyExistingCheck(p);
         ex.setCategory(p.getCategory());
         ex.setName(p.getName());
+        return ex;
 //        dao.update(ex);
     }
 
@@ -125,7 +126,7 @@ public class BrandDto {
         return d;
     }
 
-    private static BrandPojo convert(BrandForm f) {
+    static BrandPojo convert(BrandForm f) {
         BrandPojo p = new BrandPojo();
         p.setCategory(f.getCategory());
         p.setName(f.getName());

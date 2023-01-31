@@ -16,8 +16,8 @@ public class InventoryService {
 	private InventoryDao dao;
 
 	@Transactional(rollbackOn = ApiException.class)
-	public void add(InventoryPojo p) throws ApiException {
-		dao.insert(p);
+	public InventoryPojo add(InventoryPojo p) throws ApiException {
+		return dao.insert(p);
 	}
 
 //	@Transactional

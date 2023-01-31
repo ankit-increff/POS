@@ -23,7 +23,7 @@ public class OrderDto {
 
     //ADDING AN ORDER
     @Transactional(rollbackOn = ApiException.class)
-    public void add(List<OrderForm> forms) throws ApiException {
+    public List<OrderItemData> add(List<OrderForm> forms) throws ApiException {
         if(forms.size()==0) {
             throw new ApiException("Add some products!");
         }
@@ -40,6 +40,7 @@ public class OrderDto {
         p.setDate(date);
         int orderId = service.add(p);
 
+        List<OrderItemData> data = new ArrayList<>();
         for(OrderForm f:forms)
         {
             OrderItemPojo itemPojo = convert(f);
@@ -49,7 +50,12 @@ public class OrderDto {
 
             itemPojo.setOrderId(orderId);
             itemService.add(itemPojo);
+
+            data.add(convert(itemPojo));
         }
+        return data;
+
+
     }
 
     //GETTING ALL ORDERS

@@ -22,17 +22,18 @@ public class ProductService {
 
 	//ADDING A BRAND
 	@Transactional(rollbackOn = ApiException.class)
-	public void add(ProductPojo p) throws ApiException {
+	public ProductPojo add(ProductPojo p) throws ApiException {
 		normalize(p);
 		barcodeCheck(p.getBarcode());
 		if(StringUtil.isEmpty(p.getName())) {
 			throw new ApiException("name cannot be empty");
 		}
-		dao.insert(p);
+		ProductPojo productPojo = dao.insert(p);
 		InventoryPojo inventoryPojo = new InventoryPojo();
 		inventoryPojo.setQuantity(0);
 		inventoryPojo.setId(p.getId());
 		inventoryService.add(inventoryPojo);
+		return productPojo;
 	}
 
 	//GETTING A BRAND
@@ -59,13 +60,14 @@ public class ProductService {
 
 	//UPDATE A BRAND
 	@Transactional(rollbackOn  = ApiException.class)
-	public void update(int id, ProductPojo p) throws ApiException {
+	public ProductPojo update(int id, ProductPojo p) throws ApiException {
 		normalize(p);
 		barcodeCheck(p.getBarcode(),id);
 		ProductPojo ex = getCheck(id);
 		ex.setMrp(p.getMrp());
 		ex.setName(p.getName());
 		dao.update(ex);
+		return ex;
 	}
 
 	//CHECKS:------------------

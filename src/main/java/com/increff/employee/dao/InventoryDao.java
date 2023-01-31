@@ -21,8 +21,9 @@ public class InventoryDao extends AbstractDao {
 	private EntityManager em;
 
 	@Transactional
-	public void insert(InventoryPojo p) {
+	public InventoryPojo insert(InventoryPojo p) {
 		em.persist(p);
+		return p;
 	}
 
 //	public int delete(int id) {

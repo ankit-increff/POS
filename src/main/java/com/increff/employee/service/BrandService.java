@@ -19,8 +19,8 @@ public class BrandService {
 
 	//ADDING A BRAND
 	@Transactional(rollbackOn = ApiException.class)
-	public void add(BrandPojo p) throws ApiException {
-		dao.insert(p);
+	public BrandPojo add(BrandPojo p) throws ApiException {
+		return dao.insert(p);
 	}
 
 	//DELETING A BRAND

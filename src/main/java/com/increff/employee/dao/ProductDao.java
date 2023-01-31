@@ -20,9 +20,10 @@ public class ProductDao extends AbstractDao {
 	private EntityManager em;
 
 	@Transactional
-	public void insert(ProductPojo p) {
+	public ProductPojo insert(ProductPojo p) {
 //		System.out.println(p.getName()+p.getId()+p.getBarcode()+p.getMrp()+p.getBrandId());
 		em.persist(p);
+		return p;
 	}
 
 	public ProductPojo select(int id) {
