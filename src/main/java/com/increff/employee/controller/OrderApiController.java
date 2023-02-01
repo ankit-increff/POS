@@ -21,37 +21,38 @@ import java.util.List;
 
 @Api
 @RestController
+@RequestMapping(value = "/api/order")
 public class OrderApiController {
 
 	@Autowired
 	private OrderDto dto;
 
 	@ApiOperation(value = "Adds an order")
-	@RequestMapping(path = "/api/order", method = RequestMethod.POST)
+	@RequestMapping(path = "", method = RequestMethod.POST)
 	public void add(@RequestBody List<OrderForm> forms) throws ApiException {
 		dto.add(forms);
 	}
 
 	@ApiOperation(value = "Gets list of all orders")
-	@RequestMapping(path = "/api/order", method = RequestMethod.GET)
+	@RequestMapping(path = "", method = RequestMethod.GET)
 	public List<OrderData> getAll() throws ApiException {
 		return dto.getAll();
 	}
 
 	@ApiOperation(value = "Gets list of all items")
-	@RequestMapping(path = "/api/order/{id}", method = RequestMethod.GET)
+	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
 	public List<OrderItemData> getAllItems(@PathVariable int id) throws ApiException{
 		return dto.getAllItems(id);
 	}
 
 	@ApiOperation(value = "Updates an order")
-	@RequestMapping(path = "/api/order/{id}", method = RequestMethod.PUT)
+	@RequestMapping(path = "/{id}", method = RequestMethod.PUT)
 	public void updateOrder(@PathVariable int id, @RequestBody List<OrderForm> forms) throws ApiException{
 		dto.update(id, forms);
 	}
 
 	@ApiOperation(value = "Generates invoice")
-	@RequestMapping(value = "/api/order/invoice/{id}",method = RequestMethod.GET)
+	@RequestMapping(value = "/invoice/{id}",method = RequestMethod.GET)
 	public void generateInvoice(@PathVariable int id, HttpServletResponse response) throws ApiException, ParserConfigurationException, TransformerException, FOPException, IOException {
 		List<BillData> list = dto.generateInvoice(id);
 
@@ -62,7 +63,7 @@ public class OrderApiController {
 	}
 
 	@ApiOperation(value = "disable invoice")
-	@RequestMapping(value = "/api/order/invoice-disable/{id}",method = RequestMethod.GET)
+	@RequestMapping(value = "/invoice-disable/{id}",method = RequestMethod.GET)
 	public void disableInvoice(@PathVariable int id) throws ApiException, ParserConfigurationException, TransformerException, FOPException, IOException {
 		dto.disableInvoice(id);
 	}

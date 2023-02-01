@@ -20,6 +20,11 @@ function addProduct(event){
 		return;
 	}
 	
+	if(barcode.value.trim()==""){
+		throwError("Empty barcode!!");
+		return;
+	}
+
 	//Set the values to update
 	var $form = $("#product-form");
 	var json = toJson($form);
@@ -94,19 +99,54 @@ var processCount = 0;
 
 function processData(){
 	var file = $('#productFile')[0].files[0];
+	if(!file)
+    {
+        throwError("Please select a file!")
+        return;
+    }
 	readFileData(file, readFileDataCallback);
 }
 
 function readFileDataCallback(results){
 	fileData = results.data;
+	var meta = results.meta;
+    if(meta.fields.length!=5 ) {
+        var row = {};
+        row.error="Number of headers do not match!";
+        errorData.push(row);
+        updateUploadDialog()
+		$("#download-errors").show();
+        return;
+    }
+    if(meta.fields[0]!="name" || meta.fields[1]!="barcode" || meta.fields[2]!="brand" || meta.fields[3]!="category"|| meta.fields[4]!="mrp")
+    {
+        var row = {};
+        row.error="Incorrect headers name!";
+        errorData.push(row);
+        updateUploadDialog();
+		$("#download-errors").show();
+        return;
+    }
+    const MAX_ROWS = 5000
+    if(results.data.length>MAX_ROWS){
+        throwError("File too big!");
+        return;
+    }
 	uploadRows();
 }
 
 function uploadRows(){
 	//Update progress
 	updateUploadDialog();
-	//If everything processed then return
 	if(processCount==fileData.length){
+		if(errorData.length===0)
+		{
+			handleAjaxSuccess("Product File uploaded successfully")
+			$('#upload-product-modal').modal('toggle');
+			return;
+		}
+
+		$("#download-errors").show();
 		return;
 	}
 	
@@ -130,7 +170,9 @@ function uploadRows(){
 			getProductList();
 	   },
 	   error: function(response){
-	   		row.error=response.responseText
+			var data = JSON.parse(response.responseText);
+			row.error=data["message"];
+			row.error_in_row_no = processCount
 	   		errorData.push(row);
 	   		uploadRows();
 			getProductList();
@@ -202,12 +244,13 @@ function updateUploadDialog(){
 
 function updateFileName(){
 	var $file = $('#productFile');
-	var fileName = $file.val();
+	var fileName = $file.val().split('\\').pop();
 	$('#productFileName').html(fileName);
 }
 
 function displayUploadData(){
- 	resetUploadDialog(); 	
+ 	resetUploadDialog(); 
+	$('#download-errors').hide();	
 	$('#upload-product-modal').modal('toggle');
 }
 

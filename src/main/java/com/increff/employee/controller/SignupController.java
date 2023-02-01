@@ -11,6 +11,7 @@ import com.increff.employee.util.UserPrincipal;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -33,6 +34,9 @@ public class SignupController {
 	private UserService service;
 	@Autowired
 	private InfoData info;
+
+	@Value("${admin.email}")
+	private String adminEmail;
 	
 	@ApiOperation(value = "Signs up a user")
 	@RequestMapping(path = "/session/signup", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -60,8 +64,14 @@ public class SignupController {
 			return new ModelAndView("redirect:/site/login");
 		}
 
-		UserPojo p = SignupUtil.convert(f,"operator");
+		UserPojo p;
+		if(Objects.equals(f.getEmail(), adminEmail)){
+			p = SignupUtil.convert(f, "supervisor");
+		} else {
+			p = SignupUtil.convert(f, "operator");
+		}
 		service.add(p);
+
 
 		// Create authentication object
 		Authentication authentication = convert(p);

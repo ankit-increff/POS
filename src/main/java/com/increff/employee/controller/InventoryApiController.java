@@ -13,31 +13,32 @@ import java.util.List;
 
 @Api
 @RestController
+@RequestMapping(value = "/api/inventory")
 public class InventoryApiController {
 
 	@Autowired
 	private InventoryDto dto;
 
 	@ApiOperation(value = "Adds an inventory")
-	@RequestMapping(path = "/api/inventory", method = RequestMethod.POST)
+	@RequestMapping(path = "", method = RequestMethod.POST)
 	public void increase(@RequestBody InventoryForm form) throws ApiException {
 		dto.increase(form);
 	}
 
 	@ApiOperation(value = "Gets an inventory by barcode")
-	@RequestMapping(path = "/api/inventory/{barcode}", method = RequestMethod.GET)
+	@RequestMapping(path = "/{barcode}", method = RequestMethod.GET)
 	public InventoryData get(@PathVariable String barcode) throws ApiException {
 		return dto.get(barcode);
 	}
 
 	@ApiOperation(value = "Gets list of all inventories")
-	@RequestMapping(path = "/api/inventory", method = RequestMethod.GET)
+	@RequestMapping(path = "", method = RequestMethod.GET)
 	public List<InventoryData> getAll() throws ApiException {
 		return dto.getAll();
 	}
 
 	@ApiOperation(value = "Updates an inventory")
-	@RequestMapping(path = "/api/inventory/{barcode}", method = RequestMethod.PUT)
+	@RequestMapping(path = "/{barcode}", method = RequestMethod.PUT)
 	public void update(@PathVariable String barcode, @RequestBody InventoryForm f) throws ApiException {
 		dto.update(barcode,f);
 	}

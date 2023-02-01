@@ -13,6 +13,7 @@ import java.util.List;
 
 @Api
 @RestController
+@RequestMapping(value = "/api/reports")
 public class ReportController {
 
 	@Autowired
@@ -20,25 +21,25 @@ public class ReportController {
 
 
 	@ApiOperation(value = "Gets list of all inventories")
-	@RequestMapping(path = "/api/reports/inventory", method = RequestMethod.POST)
+	@RequestMapping(path = "/inventory", method = RequestMethod.POST)
 	public List<InventoryReportData> getAllinventory(@RequestBody ReportForm form) throws ApiException {
 		return dto.getInventories(form);
 	}
 
 	@ApiOperation(value = "Gets list of all brand-categories")
-	@RequestMapping(path = "/api/reports/brand-category", method = RequestMethod.POST)
+	@RequestMapping(path = "/brand-category", method = RequestMethod.POST)
 	public List<BrandForm> getAllBrands(@RequestBody ReportForm form) throws ApiException {
 		return dto.getBrands(form);
 	}
 
 	@ApiOperation(value = "Gets list of all sales")
-	@RequestMapping(path = "/api/reports/sales", method = RequestMethod.POST)
+	@RequestMapping(path = "/sales", method = RequestMethod.POST)
 	public List<SalesReportData> getSales(@RequestBody SalesReportForm form) throws ApiException {
 		return dto.getSales(form);
 	}
 
 	@ApiOperation(value = "Gets list of daily sales report")
-	@RequestMapping(path = "/api/reports/daily-report", method = RequestMethod.GET)
+	@RequestMapping(path = "/daily-report", method = RequestMethod.GET)
 	public List<DailySalesPojo> getDailySales() throws ApiException {
 		return dto.getDailySales();
 	}

@@ -82,11 +82,40 @@ var processCount = 0;
 
 function processData(){
 	var file = $('#brandFile')[0].files[0];
+	if(!file)
+    {
+        throwError("Please select a file!")
+        return;
+    }
 	readFileData(file, readFileDataCallback);
 }
 
 function readFileDataCallback(results){
 	fileData = results.data;
+	var meta = results.meta;
+	console.log(meta);
+    if(meta.fields.length!=2 ) {
+        var row = {};
+        row.error="Number of headers do not match!";
+        errorData.push(row);
+        updateUploadDialog()
+		$("#download-errors").show();
+        return;
+    }
+    if(meta.fields[0]!="name" || meta.fields[1]!="category")
+    {
+        var row = {};
+        row.error="Incorrect headers name!";
+        errorData.push(row);
+        updateUploadDialog()
+		$("#download-errors").show();
+        return;
+    }
+    const MAX_ROWS = 5000
+    if(results.data.length>MAX_ROWS){
+        throwError("File too big!")
+        return
+    }
 	uploadRows();
 }
 
@@ -95,6 +124,14 @@ function uploadRows(){
 	updateUploadDialog();
 	//If everything processed then return
 	if(processCount==fileData.length){
+		if(errorData.length===0)
+		{
+			handleAjaxSuccess("Brand File uploaded successfully")
+			$('#upload-brand-modal').modal('toggle');
+			return;
+		}
+
+		$("#download-errors").show();
 		return;
 	}
 
@@ -118,7 +155,9 @@ function uploadRows(){
 			getBrandList();
 	   },
 	   error: function(response){
-	   		row.error=response.responseText
+			var data = JSON.parse(response.responseText);
+			row.error=data["message"];
+		    row.error_in_row_no = processCount
 	   		errorData.push(row);
 	   		uploadRows();
 			getBrandList();
@@ -190,6 +229,7 @@ function updateFileName(){
 
 function displayUploadData(){
  	resetUploadDialog();
+	 $('#download-errors').hide();
 	$('#upload-brand-modal').modal('toggle');
 }
 

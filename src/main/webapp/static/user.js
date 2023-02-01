@@ -84,6 +84,10 @@ function displayEditUser(id){
 }
 
 function displayUser(data){
+	if(data.role=="supervisor") {
+		throwError("Can't edit supervisor!!");
+		return;
+	}
 	$("#user-edit-form input[name=email]").val(data.email);
 	$("#user-edit-form select[name=role]").val(data.role);
 	$('#edit-user-modal').modal('toggle');

@@ -80,19 +80,55 @@ var processCount = 0;
 
 function processData(){
 	var file = $('#inventoryFile')[0].files[0];
+	if(!file)
+    {
+        throwError("Please select a file!")
+        return;
+    }
 	readFileData(file, readFileDataCallback);
 }
 
 function readFileDataCallback(results){
 	fileData = results.data;
+	var meta = results.meta;
+	if(meta.fields.length!=2 ) {
+		var row = {};
+		row.error="Number of headers do not match!";
+		errorData.push(row);
+		updateUploadDialog()
+		$("#download-errors").show();
+		return;
+	}
+	if(meta.fields[0]!="barcode" || meta.fields[1]!="quantity")
+	{
+		var row = {};
+		row.error="Incorrect headers name!";
+		errorData.push(row);
+		updateUploadDialog()
+		$("#download-errors").show();
+		return;
+	}
+	const MAX_ROWS = 5000
+	if(results.data.length>MAX_ROWS){
+		throwError("File too big!");
+		return
+	}
 	uploadRows();
 }
 
 function uploadRows(){
 	//Update progress
 	updateUploadDialog();
-	//If everything processed then return
+
 	if(processCount==fileData.length){
+		if(errorData.length===0)
+		{
+			handleAjaxSuccess("Inventory File uploaded successfully")
+			$('#upload-inventory-modal').modal('toggle');
+			return;
+		}
+
+		$("#download-errors").show();
 		return;
 	}
 
@@ -116,7 +152,9 @@ function uploadRows(){
 			getInventoryList();
 	   },
 	   error: function(response){
-	   		row.error=response.responseText
+			var data = JSON.parse(response.responseText);
+			row.error=data["message"];
+			row.error_in_row_no = processCount
 	   		errorData.push(row);
 	   		uploadRows();
 			getInventoryList();
@@ -184,19 +222,19 @@ function updateUploadDialog(){
 
 function updateFileName(){
 	var $file = $('#inventoryFile');
-	var fileName = $file.val();
+	var fileName = $file.val().split('\\').pop();
 	$('#inventoryFileName').html(fileName);
 }
 
 function displayUploadData(){
  	resetUploadDialog();
+	$('#download-errors').hide();
 	$('#upload-inventory-modal').modal('toggle');
 }
 
 function displayInventory(data){
 	$("#inventory-edit-form input[name=barcode]").val(data.barcode);
 	$("#inventory-edit-form input[name=quantity]").val(data.quantity);
-//	$("#inventory-edit-form input[name=id]").val(data.id);
 	$('#edit-inventory-modal').modal('toggle');
 }
 

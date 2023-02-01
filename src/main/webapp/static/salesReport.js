@@ -149,6 +149,7 @@ const categoryChanged = () => {
     $('thead').hide();
     fillOptions();
     $("#inputEndDate")[0].max = new Date().toISOString().split("T")[0];
+    $("#inputStartDate")[0].max = new Date().toISOString().split("T")[0];
 
 	let element = document.querySelector("#salesReportLink");
 	element.classList.add("active");

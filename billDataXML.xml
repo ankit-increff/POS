@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><bill><order_id>55</order_id><date>31-01-2023</date><time>18:45:46</time><item><id>re7</id><name>m1</name><quantity>14</quantity><mrp>9999.01</mrp><cost>139986.14</cost></item><total> Rs.  139986.14</total></bill>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><bill><order_id>56</order_id><date>01-02-2023</date><time>11:05:17</time><item><id>tr5</id><name>type c charger</name><quantity>150</quantity><mrp>670.00</mrp><cost>100500.00</cost></item><total> Rs.  100500.00</total></bill>
