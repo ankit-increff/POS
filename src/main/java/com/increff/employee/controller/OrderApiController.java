@@ -2,10 +2,7 @@ package com.increff.employee.controller;
 
 import com.increff.employee.dto.OrderDto;
 import com.increff.employee.model.*;
-import com.increff.employee.pojo.BrandPojo;
 import com.increff.employee.service.ApiException;
-import com.increff.employee.service.BrandService;
-import com.increff.employee.service.OrderService;
 import com.increff.employee.util.GeneratePDF;
 import com.increff.employee.util.GenerateXML;
 import io.swagger.annotations.Api;

@@ -80,7 +80,6 @@ public class BrandDto {
         ex.setCategory(p.getCategory());
         ex.setName(p.getName());
         return ex;
-//        dao.update(ex);
     }
 
     //CHECKS:------------------

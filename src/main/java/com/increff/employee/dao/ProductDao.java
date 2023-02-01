@@ -21,7 +21,6 @@ public class ProductDao extends AbstractDao {
 
 	@Transactional
 	public ProductPojo insert(ProductPojo p) {
-//		System.out.println(p.getName()+p.getId()+p.getBarcode()+p.getMrp()+p.getBrandId());
 		em.persist(p);
 		return p;
 	}

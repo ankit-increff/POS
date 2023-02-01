@@ -23,13 +23,6 @@ public class InventoryDto {
     @Autowired
     private ProductService productService;
 
-//    @Transactional(rollbackOn = ApiException.class)
-//    public InventoryData add(InventoryForm form) throws ApiException {
-//        InventoryPojo p = convert(form);
-//        InventoryPojo inventoryPojo = service.add(p);
-//        return convert(inventoryPojo);
-//    }
-
     @Transactional(rollbackOn = ApiException.class)
     public void increase(InventoryForm form) throws ApiException {
         InventoryPojo p = convert(form);
@@ -72,7 +65,6 @@ public class InventoryDto {
         return d;
     }
 
-    //	@Transactional(rollbackOn = ApiException.class)
     private InventoryPojo convert(InventoryForm f) throws ApiException {
         if(Integer.parseInt(f.getQuantity()) < 0) {
             throw new ApiException("Quantity can't be negative!!");

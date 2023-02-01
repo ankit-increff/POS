@@ -68,12 +68,10 @@ public class ProductDto {
         BrandPojo brand = brandService.get(p.getBrandId());
         d.setBrand(brand.getName());
         d.setCategory(brand.getCategory());
-//		System.out.println(d.getMrp());
 
         return d;
     }
 
-    //	@Transactional(rollbackOn = ApiException.class)
     private ProductPojo convert(ProductForm f) throws ApiException {
         if(Double.parseDouble(f.getMrp()) < 0) {
             throw new ApiException("MRP can't be negative!!");

@@ -110,7 +110,6 @@ public class OrderDto {
         return reqBill;
     }
 
-    //-------------------------------------------------------------------------------------------------------
     //UPDATING AN ORDER BY ORDER ID
     @Transactional(rollbackOn = ApiException.class)
     public void update(int orderId, List<OrderForm> newForms) throws ApiException {
@@ -140,7 +139,7 @@ public class OrderDto {
         p.setDate(date);
 
         //INVENTORY UPDATE A/C TO NEW REQUIREMENTS
-        Map<Integer, OrderForm> orderFormMap = new HashMap<>(); //map<productid, form>
+        Map<Integer, OrderForm> orderFormMap = new HashMap<>();
         for(OrderForm f:newForms) {
             int productId = productService.get(f.getBarcode()).getId();
             orderFormMap.put(productId, f);
@@ -169,7 +168,7 @@ public class OrderDto {
         }
 
     }
-    //----------------------------------------------------------------------------------------------------
+
 
     //UTILITIES
     private void checkQuantity(List<OrderItemPojo> oldItems, OrderForm newForm) throws ApiException {

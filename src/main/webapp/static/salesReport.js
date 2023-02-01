@@ -146,8 +146,6 @@ const categoryChanged = () => {
  
  //INITIALIZATION CODE
  function init(){
-    // $('#filter-sales-report').click(filterSalesReport);
-    // filterSalesReport();
     $('thead').hide();
     fillOptions();
     $("#inputEndDate")[0].max = new Date().toISOString().split("T")[0];

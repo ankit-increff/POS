@@ -38,7 +38,6 @@ function displayInventoryList(data){
 	let index = 1;
 	for(var i in data){
 		var e = data[i];
-		console.log(e);
 		var row = '<tr>'
 		+ '<td>' + index++ + '</td>'
 		+ '<td>' + e.brand + '</td>'
@@ -147,9 +146,7 @@ const categoryChanged = () => {
  
  //INITIALIZATION CODE
  function init(){
-    // $('#filter-report').click(filterReport);
 	$('thead').hide();
-	// filterReport();
 	fillOptions();
 
 	let element = document.querySelector("#inventoryReportLink");

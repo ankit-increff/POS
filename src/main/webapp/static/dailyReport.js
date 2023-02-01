@@ -1,4 +1,3 @@
-console.log("Report running");
 let element = document.querySelector("#dailyReportLink");
 element.classList.add("active");
 
@@ -14,7 +13,6 @@ function getReportList(){
 	   url: url,
 	   type: 'GET',
 	   success: function(data) {
-	   		console.log("succesfully fetched list");
 	   		displayReportList(data);
 	   },
 	   error: handleAjaxError
@@ -30,7 +28,6 @@ function displayReportList(data){
 	let index = 1;
 	for(var i in data){
 		var e = data[i];
-		console.log(e);
 		var row = '<tr>'
 		+ '<td>' + index++ + '</td>'
 		+ '<td>' + convertTimeStampToDateTime(e.date) + '</td>'

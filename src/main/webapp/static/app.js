@@ -2,7 +2,6 @@
 //HELPER METHOD
 function toJson($form){
     var serialized = $form.serializeArray();
-    console.log(serialized);
     var s = '';
     var data = {};
     for(s in serialized){
@@ -18,7 +17,6 @@ const getRole = () => $("meta[name=role]").attr("content");
 
 function handleAjaxError(response){
 	var response = JSON.parse(response.responseText);
-	// alert(response.message);
     $('.notifyjs-wrapper').trigger('notify-hide');
     $.notify.defaults( {clickToHide:true,autoHide:false} );
     $.notify(response.message + " ❌", 'error');
@@ -89,7 +87,6 @@ function numberWithCommas(x) {
 }
 
 const verifyRole = () => {
-    console.log(getRole());
     if(getRole() !== "supervisor") {
         $(".supervisor-only").hide();
     }
@@ -98,7 +95,3 @@ verifyRole();
 verifyNumberInput();
 
 
-
-// document.querySelector("form").addEventListener("submit", (e) => {
-//     e.preventDefault();
-// })

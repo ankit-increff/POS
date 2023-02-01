@@ -12,7 +12,6 @@ function addOrder(event){
 
 	var json = convertJson($rawForm);
 	var url = getOrderUrl();
-	console.log(json);
 
 	$.ajax({
 	   url: url,
@@ -28,40 +27,9 @@ function addOrder(event){
 	   },
 	   error: handleAjaxError
 	});
-//	location.reload();
 
 	return false;
 }
-
-// function orderDetails(event){
-
-//     console.log("update running...");
-// 	$('#order-items-modal').modal('toggle');
-// 	//Get the ID
-// 	var id = $("#brand-edit-form input[name=id]").val();
-// 	var url = getBrandUrl() + "/" + id;
-
-
-// 	//Set the values to update
-// 	var $form = $("#brand-edit-form");
-// 	var json = toJson($form);
-
-// 	$.ajax({
-// 	   url: url,
-// 	   type: 'PUT',
-// 	   data: json,
-// 	   headers: {
-//        	'Content-Type': 'application/json'
-//        },
-// 	   success: function(response) {
-// 	   		getBrandList();
-// 	   },
-// 	   error: handleAjaxError
-// 	});
-
-// 	return false;
-// }
-
 
 function getOrderList(){
 	var url = getOrderUrl();
@@ -78,7 +46,6 @@ function getOrderList(){
 //HELPER FUNCTIONS
 function convertJson($form){
     var serialized = $form.serializeArray();
-    console.log("look ",serialized);
     var s = '';
 	var arr = [];
     
@@ -101,7 +68,6 @@ function displayOrderList(data){
 	data.reverse();
 	for(var i in data){
 		var e = data[i];
-		console.log(e);
 
 		var newDate = new Date(e.date);
 		var buttonHtml = '<button title="Details" class="btn" onclick="displayOrderDetails(' + e.id + ')"><img src="'+getBaseUrl()+'/static/images/details.png" alt="Details" /></button>'
@@ -174,12 +140,10 @@ function addInEditTable(e) {
 	var productUrl = baseUrl + "/api/product"
 
 	var url = productUrl + "?barcode=" + barcode.value;
-	console.log(url);
 	$.ajax({
 	   url: url,
 	   type: 'GET',
 	   success: function(data) {
-			console.log(data);
 	   		displayInEditTable(data);
 	   },
 	   error: handleAjaxError
@@ -284,7 +248,6 @@ function displayInCreateTable(e) {
 	
 	var $tbody = $('#order-add-table').find('tbody');
 	let barcodes = $tbody[0].querySelectorAll(".new-barcode");
-	console.log(barcodes);
 	for(ele of barcodes) {
 		if(ele.innerText == barcode.value){
 			let qty = ele.parentElement.querySelector('.new-quantity');
@@ -316,7 +279,6 @@ function displayInCreateTable(e) {
 //____________________________________PLACE NEW ORDER________________________________________
 function createNewOrder(e) {
 	e.preventDefault();
-	console.log("update click registered!");
 	let rows = document.getElementsByClassName("new-row");
 	let req = [];
 	for(let i=0;i<rows.length;i++) {
@@ -332,11 +294,8 @@ function createNewOrder(e) {
 		};
 		req.push(obj);
 	}
-	console.log(req);
 	var json = JSON.stringify(req);
 	var url = getOrderUrl();
-
-	console.log(json);
 
 	$.ajax({
 	   url: url,
@@ -360,7 +319,6 @@ function createNewOrder(e) {
 //____________________________________SUBMIT UPDATE ORDER________________________________________
 function updateOrder(e) {
 	e.preventDefault();
-	console.log("update click registered!");
 	let rows = document.getElementsByClassName("update-row");
 	let req = [];
 	for(let i=0;i<rows.length;i++) {
@@ -376,11 +334,9 @@ function updateOrder(e) {
 		};
 		req.push(obj);
 	}
-	console.log(req);
 	var json = JSON.stringify(req);
 	var url = getOrderUrl() + "/" + globalOrderId;
 
-	console.log(json);
 
 	$.ajax({
 	   url: url,
@@ -422,9 +378,7 @@ function displayUploadData(){
 }
 
 function displayOrder(data){
-	console.log(data);
 	var $orderId = document.querySelector("#order-id")
-	console.log($orderId);
 	$orderId.innerText = ` (Id: ${data[0].orderId})`;
 	var $tbody = $('#order-items-table').find('tbody');
 	$tbody.empty();
@@ -442,7 +396,6 @@ function displayOrder(data){
 }
 
 
-
 function downloadBillPdf(blob){
 	let link = document.createElement('a');
 	link.href = window.URL.createObjectURL(blob);
@@ -457,14 +410,11 @@ function downloadBillPdf(blob){
 }
 
 function generateInvoice(id){
-	console.log(id);
 	var url = getOrderUrl() + "/invoice/" + id;
-	console.log(url);
 	$.ajax({
 		   url: url,
 		   type: 'GET',
 		   success: function(data) {
-			console.log(data);
 				 // process recieved pdf
 				 let binaryString = window.atob(data);
 
@@ -497,12 +447,8 @@ function generateInvoice(id){
 
 //INITIALIZATION CODE
 function init(){
-	// $('#add-order-confirm').click(CreateNewOrder);
 	$('#refresh-data').click(getOrderList);
 	$('#upload-data').click(displayUploadData);
-	// $('#process-data').click(processData);
-	// $('#download-errors').click(downloadErrors);
-    // $('#orderFile').on('change', updateFileName)
 
 	let element = document.querySelector("#order-link");
 	element.classList.add("active");

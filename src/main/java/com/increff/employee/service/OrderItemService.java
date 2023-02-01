@@ -31,7 +31,6 @@ public class OrderItemService {
 	//DELETING ALL ITEMS BY ORDERID
 	@Transactional
 	public void delete(int id) {
-		System.out.println("running");
 		itemDao.delete(id);
 	}
 

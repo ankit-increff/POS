@@ -80,7 +80,7 @@ public class GenerateXML {
         }
 
         Element total = document.createElement("total");
-        total.appendChild(document.createTextNode(String.format("%.2f",finalBill) + " Rs."));
+        total.appendChild(document.createTextNode(String.format(" Rs. " + " %.2f",finalBill) ));
         root.appendChild(total);
 
         TransformerFactory transformerFactory = TransformerFactory.newInstance();

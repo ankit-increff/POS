@@ -25,7 +25,6 @@ public class BrandDao extends AbstractDao {
 
 	@Transactional
 	public BrandPojo insert(BrandPojo p) {
-//		System.out.println(p.getName()+p.getId());
 		em.persist(p);
 		return p;
 	}

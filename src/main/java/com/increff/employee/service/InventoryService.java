@@ -20,11 +20,6 @@ public class InventoryService {
 		return dao.insert(p);
 	}
 
-//	@Transactional
-//	public void delete(int id) {
-//		dao.delete(id);
-//	}
-
 	@Transactional(rollbackOn = ApiException.class)
 	public InventoryPojo get(int id) throws ApiException {
 		return getCheck(id);

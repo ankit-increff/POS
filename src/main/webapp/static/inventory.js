@@ -1,6 +1,3 @@
-console.log("Inventory running");
-
-
 function getInventoryUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl + "/api/inventory";
@@ -65,32 +62,17 @@ function updateInventory(event){
 
 function getInventoryList(){
 	var url = getInventoryUrl();
-	console.log(url);
 	$.ajax({
 	   url: url,
 	   type: 'GET',
 	   success: function(data) {
-	   console.log("succesfully fetched list");
 	   		displayInventoryList(data);
 	   },
 	   error: handleAjaxError
 	});
 }
 
-// function deleteInventory(id){
-// 	var url = getInventoryUrl() + "/" + id;
-
-// 	$.ajax({
-// 	   url: url,
-// 	   type: 'DELETE',
-// 	   success: function(data) {
-// 	   		getInventoryList();
-// 	   },
-// 	   error: handleAjaxError
-// 	});
-// }
-
-//// FILE UPLOAD METHODS
+// FILE UPLOAD METHODS
 var fileData = [];
 var errorData = [];
 var processCount = 0;
@@ -156,9 +138,7 @@ function displayInventoryList(data){
 	let index = 1;
 	for(var i in data){
 		var e = data[i];
-//		var buttonHtml = '<button onclick="deleteInventory(' + e.id + ')">delete</button>'
 		var buttonHtml = ' <button title="Edit" class="btn supervisor-only" onclick="displayEditInventory(\'' + e.barcode + '\')"><img src="'+getBaseUrl()+'/static/images/edit1.png" alt="Edit" /></button>'
-		console.log(e);
 		var row = '<tr>'
 		+ '<td>' + index++ + '</td>'
 		+ '<td>' + e.barcode + '</td>'
@@ -173,7 +153,6 @@ function displayInventoryList(data){
 
 function displayEditInventory(barcode){
 	var url = getInventoryUrl() + "/" + barcode;
-	console.log(url);
 	$.ajax({
 	   url: url,
 	   type: 'GET',
@@ -224,8 +203,6 @@ function displayInventory(data){
 
 //INITIALIZATION CODE
 function init(){
-	// $('#add-inventory-confirm').click(addInventory);
-	// $('#update-inventory').click(updateInventory);
 	$('#refresh-data').click(getInventoryList);
 	$('#upload-data').click(displayUploadData);
 	$('#process-data').click(processData);

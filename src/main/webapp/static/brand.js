@@ -1,6 +1,3 @@
-console.log("Brand running");
-
-
 function getBrandUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl + "/api/brand";
@@ -33,9 +30,6 @@ function addBrand(event){
 	return false;
 }
 
-// function createBrand(event){
-// 	$('#add-brand-modal').modal('toggle');
-// }
 
 function updateBrand(event){
 	event.preventDefault();
@@ -57,7 +51,6 @@ function updateBrand(event){
        	'Content-Type': 'application/json'
        },
 	   success: function(response) {
-			console.log("heya responsing");
 			$('#edit-brand-modal').modal('toggle');
 			handleAjaxSuccess("Brand edited successfully!!");
 	   		getBrandList();
@@ -71,8 +64,6 @@ function updateBrand(event){
 
 function getBrandList(){
 	var url = getBrandUrl();
-	console.log(url);
-	console.log("getting brand")
 	$.ajax({
 	   url: url,
 	   type: 'GET',
@@ -142,14 +133,12 @@ function downloadErrors(){
 //UI DISPLAY METHODS
 
 function displayBrandList(data){
-console.log("displaying brand")
 	let index=1;
 	var $tbody = $('#brand-table').find('tbody');
 	$tbody.empty();
 	data.reverse();
 	for(var i in data){
 		var e = data[i];
-		// var buttonHtml = '<button onclick="deleteBrand(' + e.id + ')">delete</button>'
 		var buttonHtml = ' <button title="Edit" class="btn" onclick="displayEditBrand(' + e.id + ')"><img src="'+getBaseUrl()+'/static/images/edit1.png" alt="Edit" /></button>'
 		var row = '<tr>'
 		+ '<td>' + index++ + '</td>'
@@ -196,12 +185,10 @@ function updateUploadDialog(){
 function updateFileName(){
 	var $file = $('#brandFile');
 	var fileName = $file.val().split('\\').pop();
-	console.log(fileName);
 	$('#brandFileName').html(fileName);
 }
 
 function displayUploadData(){
-	console.log("upload");
  	resetUploadDialog();
 	$('#upload-brand-modal').modal('toggle');
 }
@@ -218,9 +205,6 @@ function displayBrand(data){
 
 //INITIALIZATION CODE
 function init(){
-	// $('#add-brand-confirm').click(addBrand);
-	// $('#update-brand').click(updateBrand);
-	// $('#create-brand').click(createBrand);
 	$('#refresh-data').click(getBrandList);
 	$('#upload-data').click(displayUploadData);
 	$('#process-data').click(processData);

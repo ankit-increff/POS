@@ -55,8 +55,6 @@ function deleteUser(id){
 //UI DISPLAY METHODS
 
 function displayUserList(data){
-	console.log('Printing user data');
-	console.log(data);
 	var $tbody = $('#user-table').find('tbody');
 	$tbody.empty();
 	for(var i in data){
@@ -86,9 +84,7 @@ function displayEditUser(id){
 }
 
 function displayUser(data){
-	console.log(data);
 	$("#user-edit-form input[name=email]").val(data.email);
-	// $('select>option:eq(3)').attr('selected', true);
 	$("#user-edit-form select[name=role]").val(data.role);
 	$('#edit-user-modal').modal('toggle');
 }

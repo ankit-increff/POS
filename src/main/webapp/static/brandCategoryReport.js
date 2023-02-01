@@ -144,9 +144,7 @@ const categoryChanged = () => {
 
 //INITIALIZATION CODE
 function init(){
-	// $('#filter-report').click(filterReport);
 	$('thead').hide();
-	// filterReport();
 	fillOptions();
 
 	let element = document.querySelector("#brandCategoryReportLink");

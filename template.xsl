@@ -170,14 +170,13 @@
                 </fo:table-body>
             </fo:table>
             <fo:table table-layout="fixed" width="100%">
-                <fo:table-column column-width="50%" />
-                <fo:table-column column-width="50%" />
+                <fo:table-column column-width="100%" />
                 <fo:table-body>
                     <fo:table-row>
-                        <fo:table-cell padding-top="50pt">
+                        <fo:table-cell padding-top="15pt">
                             <fo:block font-size="20pt" font-family="sans-serif"
-                                      color="black" text-align="left" >
-                                Total: <xsl:value-of select="total" />
+                                      color="black" text-align="right" >
+                                Total:  <xsl:value-of select="total" />
                             </fo:block>
                         </fo:table-cell>
 

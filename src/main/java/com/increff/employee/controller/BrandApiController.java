@@ -6,13 +6,11 @@ import com.increff.employee.model.BrandForm;
 import com.increff.employee.model.InfoData;
 import com.increff.employee.pojo.BrandPojo;
 import com.increff.employee.service.ApiException;
-import com.increff.employee.service.BrandService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Api
@@ -39,7 +37,6 @@ public class BrandApiController {
 	@ApiOperation(value = "Gets list of all brands by name and category")
 	@RequestMapping(path = "/api/brand", params = {"brand", "category"}, method = RequestMethod.GET)
 	public List<BrandPojo> getByBrandCategory(@RequestParam(value = "brand") String brand, @RequestParam(value = "category") String category) throws ApiException {
-//		System.out.println(brand+category);
 		return dto.getByNameCategory(brand, category);
 	}
 

@@ -13,6 +13,12 @@ let primaryField = null;
 //BUTTON ACTIONS
 function addProduct(event){
 	event.preventDefault();
+
+	let barcode = $("#inputBarcode")[0];
+	if(barcode.value.match("/")) {
+		throwError("Invalid barcode");
+		return;
+	}
 	
 	//Set the values to update
 	var $form = $("#product-form");
@@ -79,19 +85,6 @@ function getProductList(){
 	   error: handleAjaxError
 	});
 }
-
-//function deleteProduct(id){
-//	var url = getProductUrl() + "/" + id;
-//
-//	$.ajax({
-//	   url: url,
-//	   type: 'DELETE',
-//	   success: function(data) {
-//	   		getProductList();
-//	   },
-//	   error: handleAjaxError
-//	});
-//}
 
 // FILE UPLOAD METHODS
 var fileData = [];
@@ -160,8 +153,6 @@ function displayProductList(data){
 
 	for(var i in data){
 		var e = data[i];
-//		console.log(e);
-//		var buttonHtml = '<button onclick="deleteProduct(' + e.id + ')">delete</button>'
 		var buttonHtml = ' <button title="Edit" class="btn" onclick="displayEditProduct(' + e.id + ')"><img src="'+getBaseUrl()+'/static/images/edit1.png" alt="Edit" /></button>'
 		var row = '<tr>'
 		+ '<td>' + index++ + '</td>'
@@ -221,8 +212,6 @@ function displayUploadData(){
 }
 
 function displayProduct(data){
-//console.log("data = ")
-//    console.log(data);
 	$("#product-edit-form input[name=name]").val(data.name);
 	$("#product-edit-form input[name=barcode]").val(data.barcode);
 	$("#product-edit-form input[name=id]").val(data.id);
@@ -324,8 +313,6 @@ const categoryChanged = () => {
 
 //INITIALIZATION CODE
 function init(){
-	// $('#add-product-confirm').click(addProduct);
-	// $('#update-product').click(updateProduct);
 	$('#refresh-data').click(getProductList);
 	$('#upload-data').click(displayUploadData);
 	$('#process-data').click(processData);

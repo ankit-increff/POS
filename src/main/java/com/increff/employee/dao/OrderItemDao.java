@@ -1,6 +1,5 @@
 package com.increff.employee.dao;
 
-import com.increff.employee.pojo.BrandPojo;
 import com.increff.employee.pojo.OrderItemPojo;
 import org.springframework.stereotype.Repository;
 

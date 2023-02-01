@@ -99,7 +99,7 @@ public class ReportDto {
         form.setStartDate(getStartOfDay(form.getStartDate(),Calendar.getInstance()));
         form.setEndDate(getEndOfDay(form.getEndDate(),Calendar.getInstance()));
 
-        //
+
         String brand = form.getBrand();
         String category = form.getCategory();
 
