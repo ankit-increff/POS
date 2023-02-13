@@ -1,25 +1,20 @@
 <head th:fragment="name_head">
-
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="baseUrl" th:attr="content=${baseUrl}">
-<meta name="role" th:attr="content=${role}">
-
-<script src="https://kit.fontawesome.com/908c6761fc.js" crossorigin="anonymous"></script>
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" th:href="@{/static/app.css}">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap" rel="stylesheet">
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="baseUrl" th:attr="content=${baseUrl}">
+  <meta name="role" th:attr="content=${role}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/static/css/app.css}">
 </head>
 
+<!-- site navbar  -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-1 shadow-sm sticky-top" th:fragment="name_site_navbar">
   <a class="navbar-brand img-link" th:href="@{/site/login}">
-    <img th:src="@{/static/logo.jpg}" class="d-inline-block align-top" alt="" height="50">
+    <img th:src="@{/static/images/logo.jpg}" class="d-inline-block align-top" alt="" height="50">
   </a>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse ml-4" id="navbarNav">
@@ -31,77 +26,80 @@
         <a class="nav-link" th:href="@{/site/pricing}">Pricing</a>
       </li>
     </ul>
-    
     <ul class="navbar-nav ml-auto hidden">
-       <li class="nav-item login-nav">
+      <li class="nav-item login-nav">
         <a class="btn shadow btn-primary" th:href="@{/site/login}">Login</a>
       </li>
-       <li class="nav-item ml-2 signup-nav">
+      <li class="nav-item ml-2 signup-nav">
         <a class="btn shadow btn-primary" th:href="@{/site/signup}">Sign-up</a>
       </li>
     </ul>
- 
   </div>
 </nav>
 
+<!-- app navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-1 shadow-sm sticky-top" th:fragment="name_app_navbar">
   <a class="navbar-brand img-link" th:href="@{/ui/home}">
-    <img th:src="@{/static/logo.jpg}" class="d-inline-block align-top" alt="" height="50">
+    <img th:src="@{/static/images/logo.jpg}" class="d-inline-block align-top" alt="" height="50">
   </a>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse ml-4" id="navbarNav">
     <ul class="navbar-nav nav-left">
-        <li class="nav-item">
-            <a class="nav-link" id="brand-link" th:href="@{/ui/brand}">Brand</a>
-        </li>
-        <li class="nav-item ml-2">
-            <a class="nav-link" id="product-link" th:href="@{/ui/product}">Product</a>
-        </li>
-        <li class="nav-item ml-2">
-            <a class="nav-link" id="inventory-link" th:href="@{/ui/inventory}">Inventory</a>
-        </li>
-        <li class="nav-item ml-2">
-            <a class="nav-link" id="order-link" th:href="@{/ui/order}">Order</a>
-        </li>
-        <li class="nav-item dropdown ml-2">
-          <a class="nav-link dropdown-toggle" id="reports-link" th:href="@{/ui/reports}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reports</a>
-          <div class="dropdown-menu shadow" aria-labelledby="reports-link">
-            <a id="inventoryReportLink" class="dropdown-item" th:href="@{/ui/reports/inventory}">Inventory Report</a>
-            <a id="brandCategoryReportLink" class="dropdown-item mt-1" th:href="@{/ui/reports/brand-category}">Brand Category Report</a>
-            <a id="salesReportLink" class="dropdown-item mt-1" th:href="@{/ui/reports/sales}">Sales Report</a>
-            <a id="dailyReportLink" class="dropdown-item mt-1" th:href="@{/ui/reports/daily-report}">Daily Sales Report</a>
-          </div>
+      <li class="nav-item">
+        <a class="nav-link" id="brand-link" th:href="@{/ui/brand}">Brand</a>
+      </li>
+      <li class="nav-item ml-2">
+        <a class="nav-link" id="product-link" th:href="@{/ui/product}">Product</a>
+      </li>
+      <li class="nav-item ml-2">
+        <a class="nav-link" id="inventory-link" th:href="@{/ui/inventory}">Inventory</a>
+      </li>
+      <li class="nav-item ml-2">
+        <a class="nav-link" id="order-link" th:href="@{/ui/order}">Order</a>
+      </li>
+      <li class="nav-item dropdown ml-2">
+        <a class="nav-link dropdown-toggle" id="reports-link" th:href="@{/ui/reports}" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">Reports</a>
+        <div class="dropdown-menu shadow" aria-labelledby="reports-link">
+          <a id="inventoryReportLink" class="dropdown-item" th:href="@{/ui/reports/inventory}">Inventory Report</a>
+          <a id="brandCategoryReportLink" class="dropdown-item mt-1" th:href="@{/ui/reports/brand-category}">Brand
+            Category Report</a>
+          <a id="salesReportLink" class="dropdown-item mt-1" th:href="@{/ui/reports/sales}">Sales Report</a>
+          <a id="dailyReportLink" class="dropdown-item mt-1" th:href="@{/ui/reports/daily-report}">Daily Sales
+            Report</a>
+        </div>
       </li>
       <li class="nav-item supervisor-only">
       </li>
     </ul>
-    
     <ul class="navbar-nav ml-auto">
       <li class="nav-item dropdown">
-        <div class="mb-3 nav-link position-relative dropdown-toggle" id="reports-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="mb-3 nav-link position-relative dropdown-toggle" id="reports-link" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
           [[${info.getEmail()}]]
-          <p class=" position-absolute bg-info text-white px-2 mt-1 rounded-pill medium">([[${info.getRole()}]])</p></div>
-        <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="reports-link" style="padding: 0;">
-          <a id="admin-link" class="dropdown-item nav-link extra-link supervisor-only" th:href="@{/ui/admin}">Admin &#9;<img th:src=@{/static/images/admin-small.png}/></a>
-          <a id="logout-link" class="dropdown-item nav-link extra-link" th:href="@{/session/logout}">Logout &#9;<img th:src=@{/static/images/check-out.png}/></a>
+          <p class=" position-absolute bg-info text-white px-2 mt-1 rounded-pill medium">([[${info.getRole()}]])</p>
         </div>
-    </li>
+        <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="reports-link" style="padding: 0;">
+          <a id="admin-link" class="dropdown-item nav-link extra-link supervisor-only" th:href="@{/ui/admin}">Admin
+            &#9;<img th:src=@{/static/images/admin-small.png} /></a>
+          <a id="logout-link" class="dropdown-item nav-link extra-link" th:href="@{/session/logout}">Logout &#9;<img
+              th:src=@{/static/images/check-out.png} /></a>
+        </div>
+      </li>
     </ul>
   </div>
 </nav>
 
 <footer class="footer  mt-1" th:fragment="name_footer">
-	Copyright Increff 2019
-	&nbsp;
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<script th:src="@{/static/app.js}"/></script>
-	<script th:src="@{/static/papaparse.min.js}"/></script>
-  <script th:src="@{/static/notify.min.js}"/></script>
-	
+  Copyright Increff 2023
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script th:src="@{/static/js/app.js}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js" integrity="sha512-SGWgwwRA8xZgEoKiex3UubkSkV1zSE1BS6O4pXcaxcNtUlQsOmOmhVnDwIvqGRfEmuz83tIGL13cXMZn6upPyg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </footer>
 
-
+<!-- TODO read about cdn vs local............................ -->

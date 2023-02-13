@@ -30,8 +30,8 @@ public class OrderDto {
 
         for(OrderForm f:forms)
         {
-            checkInventory(f);
             checkValidity(f);
+            checkInventory(f);
             checkPrice(f);
         }
 
@@ -54,8 +54,6 @@ public class OrderDto {
             data.add(convert(itemPojo));
         }
         return data;
-
-
     }
 
     //GETTING ALL ORDERS

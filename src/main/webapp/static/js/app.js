@@ -1,22 +1,46 @@
-
-//HELPER METHOD
-function toJson($form){
-    var serialized = $form.serializeArray();
-    var s = '';
-    var data = {};
-    for(s in serialized){
-        data[serialized[s]['name']] = serialized[s]['value']
-    }
-    var json = JSON.stringify(data);
-    return json;
+const initialize = () => {
+    verifyRole();
+    verifyNumberInput();
 }
+
+$(document).ready(initialize);
 
 const getBaseUrl = () => $("meta[name=baseUrl]").attr("content");
 const getRole = () => $("meta[name=role]").attr("content");
 
+const verifyRole = () => {
+    if(getRole() !== "supervisor") {
+        $(".supervisor-only").hide();
+    }
+}
+
+//prevent 'e' press in number field
+let invalidChars = [
+    "-",
+    "+",
+    "e",
+];
+
+const verifyNumberInput = () =>  document.querySelectorAll('input[type="number"]').forEach( input => input.addEventListener("keydown", function(e) {
+    if (invalidChars.includes(e.key)) {
+      e.preventDefault();
+    }
+  }));
+
+//HELPER METHOD
+function toJson($form){
+    let serialized = $form.serializeArray();
+    let s = '';
+    let data = {};
+    for(s in serialized){
+        data[serialized[s]['name']] = serialized[s]['value']
+    }
+    let json = JSON.stringify(data);
+    return json;
+}
 
 function handleAjaxError(response){
-	var response = JSON.parse(response.responseText);
+	var response = JSON.parse(response.responseText);////////////////////////////
     $('.notifyjs-wrapper').trigger('notify-hide');
     $.notify.defaults( {clickToHide:true,autoHide:false} );
     $.notify(response.message + " ❌", 'error');
@@ -34,21 +58,8 @@ function handleAjaxSuccess(response){
     $.notify(response, 'success');
 }
 
-//prevent 'e' press in number field
-var invalidChars = [
-    "-",
-    "+",
-    "e",
-];
-
-const verifyNumberInput = () =>  document.querySelectorAll('input[type="number"]').forEach( input => input.addEventListener("keydown", function(e) {
-    if (invalidChars.includes(e.key)) {
-      e.preventDefault();
-    }
-  }));
-
 function readFileData(file, callback){
-	var config = {
+	let config = {
 		header: true,
 		delimiter: "\t",
 		skipEmptyLines: "greedy",
@@ -61,37 +72,41 @@ function readFileData(file, callback){
 
 
 function writeFileData(arr){
-	var config = {
+	let config = {
 		quoteChar: '',
 		escapeChar: '',
 		delimiter: "\t"
 	};
 	
-	var data = Papa.unparse(arr, config);
-    var blob = new Blob([data], {type: 'text/tsv;charset=utf-8;'});
-    var fileUrl =  null;
+	let data = Papa.unparse(arr, config),
+    blob = new Blob([data], {type: 'text/tsv;charset=utf-8;'}),
+    fileUrl =  null;
 
     if (navigator.msSaveBlob) {
         fileUrl = navigator.msSaveBlob(blob, 'download.tsv');
     } else {
         fileUrl = window.URL.createObjectURL(blob);
     }
-    var tempLink = document.createElement('a');
+    let tempLink = document.createElement('a');
     tempLink.href = fileUrl;
     tempLink.setAttribute('download', 'download.tsv');
     tempLink.click(); 
+    tempLink.remove();
 }
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
 
-const verifyRole = () => {
-    if(getRole() !== "supervisor") {
-        $(".supervisor-only").hide();
-    }
+const sendAjaxRequest = (url, type, data, callback, error=handleAjaxError) => {
+    $.ajax({
+        url,
+        type,
+        data,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        success: callback,
+        error
+     });
 }
-verifyRole();
-verifyNumberInput();
-
-

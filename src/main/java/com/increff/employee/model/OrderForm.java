@@ -1,5 +1,6 @@
 package com.increff.employee.model;
 
+//TODO use getter and setter
 public class OrderForm {
 
 	private String barcode;

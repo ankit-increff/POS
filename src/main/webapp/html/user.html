@@ -1,88 +1,64 @@
 <!doctype html>
-
 <html lang="en">
-
 <head th:replace="snippets.html :: name_head"></head>
-
 <body>
-
-<nav th:replace="snippets.html :: name_app_navbar"></nav>
-
-<div class="container mt-4">
-
-<h1>Admin </h1>
-
-
-<!-- Blank Row -->
-<div class="row">
-	&nbsp;
-</div>
-<div class="row">
-
- <!-- Table -->
- <div class="col-12">
-	<table class="table table-striped table-bordered table-hover shadow p-3 mb-5 bg-white rounded" id="user-table">
-	  <thead class="thead-dark shadow sticky-top">
-	    <tr>
-	      <th scope="col">ID</th>
-	      <th scope="col">Email</th>
-	      <th scope="col">Role</th>
-	      <th class="text-center" scope="col">Actions</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    
-	  </tbody>
-	</table>
-
-</div>
-</div>
-
-<!-- User Edit Modal -->
-<div class="modal" tabindex="-1" role="dialog" id="edit-user-modal">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Edit User</h5>
-          
-        </div>
-        <div class="modal-body">
-          <form id="user-edit-form">
-            <div class="form-group row">
-              <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" name="email" placeholder="Your Email..." readonly>
+  <nav th:replace="snippets.html :: name_app_navbar"></nav>
+  <div class="container mt-4">
+    <h1>Admin </h1>
+    <div class="row mt-4">
+      <!-- Table -->
+      <div class="col-12">
+        <table class="table table-striped table-bordered table-hover shadow p-3 mb-5 bg-white rounded" id="user-table">
+          <thead class="thead-dark shadow sticky-top">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Email</th>
+              <th scope="col">Role</th>
+              <th class="text-center" scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody> </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- User Edit Modal -->
+    <div class="modal" tabindex="-1" role="dialog" id="edit-user-modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit User</h5>
+          </div>
+          <div class="modal-body">
+            <form id="user-edit-form">
+              <div class="form-group row">
+                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="email" placeholder="Your Email..." readonly>
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputRole" class="col-sm-2 col-form-label">Role</label>
-			  
-              <div class="col-sm-10">
-				<select class="custom-select form-control" name="role" id="inputRole">
-				<option value="supervisor" selected>Supervisor</option>
-				<option value="operator">Operator</option>
-			  </select>
-                <!-- <input type="text" class="form-control" name="role" placeholder="Enter Role"> -->
+              <div class="form-group row">
+                <label for="inputRole" class="col-sm-2 col-form-label">Role</label>
+                <div class="col-sm-10">
+                  <select class="custom-select form-control" name="role" id="inputRole">
+                    <option value="supervisor" selected>Supervisor</option>
+                    <option value="operator">Operator</option>
+                  </select>
+                  <!-- <input type="text" class="form-control" name="role" placeholder="Enter Role"> -->
+                </div>
               </div>
-            </div>
-            <input type="hidden" name="id" >
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn shadow btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn shadow btn-primary" id="update-user">Update</button>
+              <input type="hidden" name="id">
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn shadow btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn shadow btn-primary" id="update-user">Update</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-
-</div> <!-- Container end-->
-
-<footer th:replace="snippets.html :: name_footer"></footer>
-
-<script th:src="@{/static/user.js}"/></script>
-
-</body>	
-
+  </div> <!-- Container end-->
+  <footer th:replace="snippets.html :: name_footer"></footer>
+  <script th:src="@{/static/js/user.js}">
+  </script>
+</body>
 </html>

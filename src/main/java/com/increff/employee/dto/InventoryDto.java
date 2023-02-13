@@ -27,6 +27,7 @@ public class InventoryDto {
     public void increase(InventoryForm form) throws ApiException {
         InventoryPojo p = convert(form);
         InventoryPojo old = service.get(p.getId());
+        //TODO to remove line 28 fetch the old inventory directly from barcode
         int totalQuantity = old.getQuantity()+Integer.parseInt(form.getQuantity());
         old.setQuantity(totalQuantity);
     }
@@ -41,6 +42,7 @@ public class InventoryDto {
     @Transactional(rollbackOn = ApiException.class)
     public List<InventoryData> getAll() throws ApiException {
         List<InventoryPojo> list = service.getAll();
+        //TODO change variable names
         List<InventoryData> list2 = new ArrayList<InventoryData>();
         for (InventoryPojo p : list) {
             list2.add(convert(p));
@@ -48,6 +50,7 @@ public class InventoryDto {
         return list2;
     }
 
+    //TODO use proper function names (2 words)
     @Transactional(rollbackOn = ApiException.class)
     public void update(String barcode, InventoryForm f) throws ApiException {
         InventoryPojo p = convert(f);

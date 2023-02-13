@@ -1,31 +1,54 @@
 <!doctype html>
-
 <html lang="en">
-
 <head th:replace="snippets.html :: name_head"></head>
-
 <body>
-
-<nav th:replace="snippets.html :: name_site_navbar"></nav>
-
-<div class="container mt-4">
-<div class="row">
-<div class="col-6">
- 
-<div class="jumbotron">
-  <h1 class="display-4">Hello, world!</h1>
-  <p class="lead">Welcome to Increff Spring Tutorial</p>
-  <hr class="my-4">
-  <p>This application teaches you Spring concepts and creating awesome web applications</p>
-  <a class="btn shadow btn-primary btn-lg" th:href="@{/site/login}" role="button">Get Started</a>
-</div>
-
-</div>
-</div>
-</div> <!--Container-->
-
-<footer th:replace="snippets.html :: name_footer"></footer>
-
+	<nav th:replace="snippets.html :: name_app_navbar"></nav>
+	<div class="container mt-5">
+		<!-- Top row with form-->
+		<div class="row home-logo">
+			<a class="col-4 img-link" th:href="@{/ui/brand}" title="Brands">
+				<div class="col">
+					<img th:src="@{/static/images/brand-image.png}" alt="Brands" />
+					<h4>Brands</h4>
+				</div>
+			</a>
+			<a class="col-4 img-link" th:href="@{/ui/product}" title="Products">
+				<div class="col">
+					<img th:src="@{/static/images/package.png}" alt="Products" />
+					<h4>Products</h4>
+				</div>
+			</a>
+			<a class="col-4 img-link" th:href="@{/ui/inventory}" title="Inventory">
+				<div class="col">
+					<img th:src="@{/static/images/inventory-management.png}" alt="Inventory" />
+					<h4>Inventory</h4>
+				</div>
+			</a>
+		</div>
+		<div class="row home-logo mt-5 pt-5">
+			<a class="col-4 img-link" th:href="@{/ui/order}" title="Inventory">
+				<div class="col">
+					<img th:src="@{/static/images/order.png}" alt="Orders" />
+					<h4>Orders</h4>
+				</div>
+			</a>
+			<a class="col-4 img-link" th:href="@{/ui/reports}" title="Reports">
+				<div class="col">
+					<img th:src="@{/static/images/report.png}" alt="Reports" />
+					<h4>Reports</h4>
+				</div>
+			</a>
+			<a class="col-4 img-link supervisor-only" th:href="@{/ui/admin}" title="admin">
+				<div class="col">
+					<img th:src="@{/static/images/admin.png}" alt="admin" />
+					<h4>Admin</h4>
+				</div>
+			</a>
+		</div>
+	</div> <!-- Container end-->
+	<footer th:replace="snippets.html :: name_footer"></footer>
+	<script>
+		$(".nav-left")[0].style.display = "none";
+	</script>
 </body>
-
 </html>

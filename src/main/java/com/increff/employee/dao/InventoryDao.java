@@ -12,8 +12,9 @@ import java.util.List;
 @Repository
 public class InventoryDao extends AbstractDao {
 
-	private static String select_id = "select p from InventoryPojo p where id=:id";
-	private static String select_all = "select p from InventoryPojo p";
+	//TODO use uppercase for varible names and use "final"
+	private static final String select_id = "select p from InventoryPojo p where id=:id";
+	private static final String select_all = "select p from InventoryPojo p";
 
 	@PersistenceContext
 	private EntityManager em;

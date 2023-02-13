@@ -1,16 +1,9 @@
 <!doctype html>
-
 <html lang="en">
-
 <head th:replace="snippets.html :: name_head"></head>
-
 <body>
-
 	<nav th:replace="snippets.html :: name_site_navbar"></nav>
-
-
 	<div class="container" style="margin-top: 11vh;">
-
 		<div class="row" style="justify-content: center;">
 			<div class="col-6">
 				<div class="card shadow rounded">
@@ -36,8 +29,8 @@
 							<div class="form-group">
 								<label for="confirm-password" class="col-sm-10 col-form-label">Confirm Password</label>
 								<div class="col-sm-10">
-									<input type="password" class="form-control" name="confirmPassword" id="confirm-password"
-										placeholder="Enter Password">
+									<input type="password" class="form-control" name="confirmPassword"
+										id="confirm-password" placeholder="Enter Password">
 								</div>
 							</div>
 							<button type="submit" class="btn shadow btn-primary ml-3" id="signup">Sign-up</button>
@@ -46,21 +39,13 @@
 					<div class="card-footer text-danger">
 						[[${info.getMessage()}]]
 					</div>
-
 				</div>
-
-
-
 			</div> <!-- Col -->
 		</div> <!-- Row -->
-
 	</div> <!-- Container-->
-
 	<footer th:replace="snippets.html :: name_footer"></footer>
 	<script>
-		document.querySelector(".signup-nav").style.display = "none";
+		$(".signup-nav")[0].style.display = "none";
 	</script>
-
 </body>
-
 </html>
